@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACF,UAAU,CAAA,QAAC;EACX,SAAS,CAAA,QAAC;EACV,UAAU,CAAA,QAAC;EACX,UAAU,CAAA,QAAC;EACX,YAAY,CAAA,QAAC;EACb,eAAe,CAAA,QAAC;EAChB,YAAY,CAAA,QAAC;EACb,aAAa,CAAA,QAAC;EACd,QAAQ,CAAA,0BAAC;EACT,QAAQ,CAAA,4BAAC;EACT,QAAQ,CAAA,4BAAC;CACZ",
+    "sources": [
+        "colorScheme.scss"
+    ],
+    "names": [],
+    "file": "colorScheme.css"
+}

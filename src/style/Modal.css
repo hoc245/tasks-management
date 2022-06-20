@@ -1,0 +1,131 @@
+.modal {
+  z-index: 9999;
+}
+
+.modal .modal-background {
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+}
+
+.modal .modal-card {
+  background-color: var(--color-20);
+  border-radius: 16px;
+}
+
+.modal .modal-card .modal-card-head {
+  background-color: var(--color-20);
+  border-color: var(--color-0);
+}
+
+.modal .modal-card .modal-card-head p {
+  font-size: 24px;
+  color: var(--color-text);
+}
+
+.modal .modal-card .modal-card-head button {
+  background-color: var(--color-20);
+}
+
+.modal .modal-card .modal-card-body {
+  background-color: var(--color-20);
+  color: var(--color-text);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 16px;
+}
+
+.modal .modal-card .modal-card-body .card-header-content .card-title input {
+  font-size: 24px;
+  font-weight: 700;
+  padding: 8px 0px;
+  border-bottom: 1px solid var(--color-0);
+}
+
+.modal .modal-card .modal-card-body .card-header-content .card-title input:nth-of-type(2) {
+  font-size: 14px;
+}
+
+.modal .modal-card .modal-card-body .card-header-content .cost.col7 #costview {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid var(--color-0);
+}
+
+.modal .modal-card .modal-card-body .modal-card-body-time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.modal .modal-card .modal-card-body .modal-card-body-time .col6 {
+  width: 200px;
+}
+
+.modal .modal-card .modal-card-body .card-main-content {
+  margin-top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal .modal-card .modal-card-body .card-main-content .brief, .modal .modal-card .modal-card-body .card-main-content .note {
+  width: 100%;
+}
+
+.modal .modal-card .modal-card-body .card-body-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  gap: 16px;
+}
+
+.modal .modal-card .modal-card-body .card-body-content .userselect, .modal .modal-card .modal-card-body .card-body-content .deadline.col6, .modal .modal-card .modal-card-body .card-body-content .dropdown {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 8px 16px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 16px;
+  border: 1px solid var(--color-0);
+}
+
+.modal .modal-card .modal-card-body .card-body-content .userselect .dropdown-trigger, .modal .modal-card .modal-card-body .card-body-content .deadline.col6 .dropdown-trigger, .modal .modal-card .modal-card-body .card-body-content .dropdown .dropdown-trigger {
+  width: 100%;
+}
+
+.modal .modal-card .modal-card-body .card-body-content .userselect .dropdown-trigger .button, .modal .modal-card .modal-card-body .card-body-content .deadline.col6 .dropdown-trigger .button, .modal .modal-card .modal-card-body .card-body-content .dropdown .dropdown-trigger .button {
+  width: 100%;
+  background-color: transparent;
+}
+
+.modal .modal-card .modal-card-body .card-body-content .deadline.col6 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 8px 16px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 16px;
+  position: relative;
+}
+
+.modal .modal-card .modal-card-foot {
+  background-color: transparent;
+  border-color: var(--color-0);
+}
+/*# sourceMappingURL=Modal.css.map */

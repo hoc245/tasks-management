@@ -1,0 +1,100 @@
+// Settings
+.settings {
+    display: flex;
+    flex-wrap: wrap;
+    gap:16px;
+    align-items: stretch;
+    align-content: flex-start;
+    margin-top: 72px;
+    height: fit-content;
+    width: 100%;
+    h1 {
+        width: 100%;
+        height: fit-content;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color:var(--color-text);
+    }
+    &-left,&-right {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    &-left {
+        align-items: flex-end;
+        img {
+            max-width: 128px;
+            max-height: 128px;
+            border-radius: 16px;
+            border: 2px solid var(--color-text);
+            object-fit: cover;
+        }
+        label {
+            display: flex;
+            width: 100%;
+            max-width: 128px;
+            cursor: pointer;
+            height: 40px;
+            align-items: center;
+            gap:8px;
+            color:var(--color-text);
+            opacity: 0.8;
+            span {
+                font-size: 14px;
+                line-height: 21px;
+            }
+        }
+        input {
+            display: none;
+        }
+    }
+    &-right {
+        align-items: flex-start;
+        gap: 16px;
+        max-width: 300px;
+        input {
+            width: 100%;
+            padding:8px 16px;
+            color:var(--color-text);
+            background-color: var(--color-0);
+            box-shadow: none;
+            border:1px solid var(--color-0);
+            border-radius: 8px;
+            &:disabled {
+                opacity: 0.2;
+                cursor: not-allowed;
+            }
+        }
+        .control {
+            width: 100%;
+            .dropdown {
+                width: 100%;
+                .dropdown-trigger {
+                    width: 100%;
+                    .button {
+                        width: 100%;
+                        background-color: var(--color-0);
+                        justify-content: space-between;
+                        .icon.is-small {
+                            left:auto;
+                            right:16px;
+                            padding:0;
+                        }
+                    }
+                }
+                .dropdown-menu {
+                    left:auto;
+                    right: 0;
+                }
+            }
+        }
+        .button.is-primary {
+            min-width: 150px;
+            margin-top: 40px;
+        }
+    }
+    
+}

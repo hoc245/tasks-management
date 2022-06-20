@@ -1,0 +1,241 @@
+.Dashboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 80px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.Dashboard .dashboard-section {
+  width: calc(50% - 8px);
+  background-color: var(--color-20);
+  border: 1px solid var(--color-0);
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.Dashboard .dashboard-section.is-fullwidth {
+  width: 100%;
+  border: none;
+}
+
+.Dashboard .dashboard-section .section-title {
+  color: var(--color-text);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.Dashboard .dashboard-section table {
+  width: 100%;
+  background-color: transparent;
+}
+
+.Dashboard .dashboard-section table th {
+  border-width: 0;
+}
+
+.Dashboard .dashboard-section table thead {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.Dashboard .dashboard-section table thead tr {
+  margin-bottom: 8px;
+}
+
+.Dashboard .dashboard-section table thead tr th:not(.dropdown-state) {
+  color: var(--color-40);
+  font-size: 12px;
+}
+
+.Dashboard .dashboard-section table tbody tr {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) .userInfo {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+
+.Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) .userInfo span:nth-of-type(1) {
+  width: 100%;
+  font-weight: 700;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) .userInfo span:nth-of-type(2) {
+  font-size: 12px;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) .imageAvatar {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+  border: 2px solid var(--color-text);
+}
+
+.Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) span {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.Dashboard .dashboard-section table tbody th:not(.dropdown-state) {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.Dashboard .dashboard-section table tbody th:not(.dropdown-state) p:nth-of-type(2) {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.Dashboard .dashboard-section table tbody th.dropdown-state .dropdown {
+  width: 100%;
+  color: var(--color-text);
+}
+
+.Dashboard .dashboard-section table tbody th.dropdown-state .dropdown .dropdown-trigger {
+  width: 100%;
+}
+
+.Dashboard .dashboard-section table tbody th.dropdown-state .dropdown .dropdown-trigger .button {
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: transparent;
+  border-radius: 16px;
+  border: 1px solid var(--color-40);
+}
+
+.Dashboard .dashboard-section table tbody th.dropdown-state .dropdown .dropdown-content .dropdown-item {
+  text-align: left;
+}
+
+.Dashboard .userList th:nth-child(2), .Dashboard th:nth-child(3) {
+  text-align: center;
+}
+
+.Dashboard .totalCost {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 16px;
+  padding: 0px;
+  background-color: transparent;
+}
+
+.Dashboard .totalCost .section-title {
+  width: 100%;
+  margin-bottom: -8px;
+}
+
+.Dashboard .totalCost .cost-card {
+  width: calc((100% - 32px) / 3);
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.Dashboard .totalCost .cost-card h1 {
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+
+.Dashboard .totalCost .cost-card p {
+  font-size: 14px;
+  font-weight: 700;
+  padding-right: 24px;
+}
+
+.Dashboard .totalCost .cost-card p::after {
+  content: ' vnd';
+}
+
+.Dashboard .totalCost .cost-card:nth-of-type(2) {
+  background-color: var(--color-main);
+  color: var(--color-text);
+}
+
+.Dashboard .totalCost .cost-card:nth-of-type(3) {
+  background-color: #00b5f3;
+  color: var(--color-text);
+}
+
+.Dashboard .totalCost .cost-card:nth-of-type(4) {
+  background-color: var(--color-40);
+  color: var(--color-text);
+}
+
+@media only screen and (max-width: 1024px) {
+  .Dashboard .dashboard-section {
+    width: 100%;
+  }
+  #root > div > div > div.userList.dashboard-section > table > tbody > tr > th:nth-child(1) {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  #root > div > div > div.userList.dashboard-section > table > tbody > tr > th:nth-child(1) .userInfo {
+    max-width: 100px;
+  }
+  .Dashboard .dashboard-section table tbody tr th:nth-of-type(1) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .Dashboard .dashboard-section table tbody tr th:nth-of-type(2), .Dashboard .dashboard-section table tbody tr th:nth-of-type(3) {
+    font-size: 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: top;
+    line-height: 40px;
+  }
+  .Dashboard .dashboard-section table tbody tr th:not(.dropdown-state):nth-of-type(1) p:nth-of-type(1) {
+    min-height: 40px;
+  }
+}
+/*# sourceMappingURL=Dashboard.css.map */
