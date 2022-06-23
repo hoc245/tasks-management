@@ -34,7 +34,7 @@ export default function Button({defaultValue,valueList,type = "",onChange}) {
     return (
         <div className={"dropdown"+ " " + type} onClick={(e) => toggleDropdown(e)}>
             <div className="dropdown-trigger">
-                <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <button className="button is-small" aria-haspopup="true" aria-controls="dropdown-menu">
                     <span>{current}</span>
                     <span className="icon is-small">
                         <span className="material-symbols-outlined">expand_more</span>

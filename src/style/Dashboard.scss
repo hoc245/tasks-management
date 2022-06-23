@@ -43,8 +43,6 @@
                     border-radius: 8px;
                     overflow: hidden;
                 }
-                tr th:not(.dropdown-state):nth-of-type(1) {
-                } 
                 tr th:not(.dropdown-state) .userInfo{
                     display: inline-flex;
                     flex-direction: column;

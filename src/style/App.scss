@@ -1,10 +1,10 @@
 // Import
-@import url(colorScheme);
-@import url(Login);
-@import url(Tasks);
-@import url(Modal);
-@import url(Profile);
-@import url(Dashboard);
+@import url(colorScheme.css);
+@import url(Login.css);
+@import url(Tasks.css);
+@import url(Modal.css);
+@import url(Profile.css);
+@import url(Dashboard.css);
 // Reset default style
 * {
     margin:0;
@@ -60,7 +60,7 @@ html,body {
 .button.is-primary {
     background-color: var(--color-main);
     &:hover {
-        background-color: #c95b0f;
+        background-color: #af4b75;
     }
 }
 .button.is-ghost {
@@ -87,7 +87,7 @@ html,body {
     height: 100%;
     justify-content: center;
     align-items: stretch;
-    overflow: auto;
+    overflow-x:hidden;
 }
 // Navigation
 .nav {
@@ -192,7 +192,8 @@ html,body {
     width: 100%;
     max-width: 1200px;
     margin:auto;
-    height: 100%;
+    height: fit-content;
+    min-height: 100%;
     opacity: 0;
     transition: all 300ms ease;
     position: relative;

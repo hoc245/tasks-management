@@ -24,23 +24,57 @@
             display: flex;
             flex-direction: column;
             gap:16px;
+            overflow-x:hidden;
             .card-header-content {
                 .card-title {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 16px;
                     input {
                         font-size: 24px;
+                        line-height: 24px;
                         font-weight: 700;
                         padding:8px 0px;
                         border-bottom:1px solid var(--color-0);
                     }
                     input:nth-of-type(2) {
                         font-size: 14px;
+                        line-height: 24px;
+                        padding:8px 0px;
                     }
                 }
                 .cost.col7 {
-                    #costview {
+                    position: relative;
+                    #addCostview {
                         display: block;
                         width: 100%;
                         border-bottom: 1px solid var(--color-0);
+                        font-size: 16px;
+                        line-height: 40px;
+                        height: 40px;
+                        &::after {
+                            content: ' VNĐ';
+                        }
+                        &.is-editing {
+                            &::after {
+                                content: '|';
+                                transition: all 200ms ease;
+                                animation: wordCursor 1000ms infinite;
+                            }
+                        }
+                    }
+                    input {
+                        position: absolute;
+                        top:0;left:0;left:0;right:0;
+                        background-color: transparent;
+                        border:none;
+                        color:transparent;
+                        opacity: 0;
+                        &:focus {
+                            outline: none;
+                            border:none;
+                            box-shadow: none;
+                        }
                     }
                 }
             }
@@ -57,18 +91,40 @@
                 flex-direction: column;
                 .brief,.note {
                     width: 100%;
+                    min-height: 120px;
+                    margin-bottom: 16px;
+                    display: flex;
+                    flex-direction: column;
+                    h1 {
+                        margin-bottom: 8px;
+                    }
+                    div {
+                        height: 100%;
+                        max-height: fit-content;
+                    }
                 }
             }
             .card-body-content {
                 display: flex;
                 position: relative;
                 gap:16px;
+                justify-content: space-between;
+                flex-wrap:wrap;
+                align-items: stretch;
                 .userselect,.deadline.col6,.dropdown {
-                    width: fit-content;
-                    padding:8px 16px;
-                    height: fit-content;
+                    padding:0px;
                     border-radius: 16px;
-                    border:1px solid var(--color-0);
+                    display: flex;
+                    align-items: center;
+                    margin-top:32px;
+                    position: relative;
+                    &::after {
+                        display: block;
+                        position: absolute;
+                        top:-32px;
+                        left:0;
+                        font-size: 16px;
+                    }
                     .dropdown-trigger {
                         width: 100%;
                         .button {
@@ -77,12 +133,36 @@
                         }
                     }
                 }
+                .userselect::after {
+                    content: "Incharge";
+                }
+                .userselect:hover .tag{
+                    top:auto;
+                    bottom:-25px;
+                }
+                .deadline.col6 {
+                    cursor: pointer;
+                }
+                .dropdown.is-right {
+                    min-width: 100px;
+                    border:1px solid var(--color-0);
+                    &::after {
+                        content: "State"
+                    }
+                }
+                .dropdown.is-right:nth-of-type(4) {
+                    &::after {
+                        content: "Company"
+                    }
+                }
                 .deadline.col6 {
                     width: fit-content;
-                    padding:8px 16px;
                     height: fit-content;
                     border-radius: 16px;
                     position: relative;
+                    &::after {
+                        content: "Deadline"
+                    }
                 }
             }
         }

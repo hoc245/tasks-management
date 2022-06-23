@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @-webkit-keyframes wordCursor {
   0% {
     opacity: 0;
@@ -9,7 +10,6 @@
     opacity: 0;
   }
 }
-
 @keyframes wordCursor {
   0% {
     opacity: 0;
@@ -31,7 +31,7 @@ input::-webkit-inner-spin-button {
 
 .tag {
   position: absolute;
-  top: 5px;
+  bottom: 0;
   opacity: 0;
   visibility: hidden;
   -webkit-transition: all 200ms ease;
@@ -49,7 +49,7 @@ input::-webkit-inner-spin-button {
 .deadline:hover .tag, .start:hover .tag, .end:hover .tag {
   opacity: 1;
   visibility: visible;
-  top: -3px;
+  bottom: -20px;
   -webkit-transition-delay: 300ms;
           transition-delay: 300ms;
 }
@@ -86,10 +86,6 @@ input:focus-visible {
           align-items: center;
   -ms-flex-negative: 1;
       flex-shrink: 1;
-}
-
-.dropdown {
-  min-width: 120px;
 }
 
 .dropdown .button {
@@ -283,156 +279,6 @@ input:focus-visible {
   opacity: 0.5;
 }
 
-.card {
-  padding: 16px;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  max-height: 500px;
-  border: 1px solid var(--color-0);
-  border-radius: 16px;
-  background-color: var(--color-20);
-  color: var(--color-text);
-  -webkit-transition: all 300ms ease;
-  transition: all 300ms ease;
-  top: 0;
-  left: 0;
-  opacity: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.card + .card {
-  margin-top: 16px;
-}
-
-.card.is-animation {
-  opacity: 0;
-  max-height: 0;
-  padding: 0;
-}
-
-.card.is-animation * {
-  min-height: 250px;
-}
-
-.card.is-hovering {
-  top: -8px;
-  left: -8px;
-  -webkit-box-shadow: var(--ds-lv1);
-          box-shadow: var(--ds-lv1);
-  opacity: 1 !important;
-}
-
-.card .card-title {
-  cursor: pointer;
-}
-
-.card .card-title:hover .tag {
-  opacity: 1;
-  visibility: visible;
-  top: -10px;
-  -webkit-transition-delay: 300ms;
-          transition-delay: 300ms;
-}
-
-.card .card-title h1 {
-  position: relative;
-  font-size: 14px;
-  width: inherit;
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 100px;
-}
-
-.card .card-title h1[contenteditable="true"] {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  overflow: visible;
-  white-space: unset;
-  text-overflow: unset;
-  border-bottom: 1px solid var(--color-40);
-  padding-bottom: 3px;
-}
-
-.card .card-title p {
-  min-width: 100px;
-  display: block;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.card .card-title p[contenteditable="true"] {
-  border-bottom: 1px solid var(--color-40);
-  padding-bottom: 3px;
-}
-
-.card .card-title p:focus, .card .card-title p:focus-visible {
-  border: none;
-  outline: none;
-}
-
-.card .card-time {
-  font-size: 12px;
-  font-weight: 500;
-  padding-top: 2px;
-}
-
-.card .cost {
-  font-size: 12px;
-  font-weight: 500;
-  padding-top: 2px;
-}
-
-.card .cost .tag {
-  left: 0;
-  top: -10px;
-}
-
-.card .cost:hover .tag {
-  opacity: 1;
-  visibility: visible;
-  top: -20px;
-  -webkit-transition-delay: 300ms;
-          transition-delay: 300ms;
-}
-
-.card .dropdown {
-  width: 120px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  border: 1px solid var(--color-0);
-  border-radius: 8px;
-}
-
-.card .dropdown .dropdown-trigger {
-  width: 100%;
-}
-
-.card .dropdown .button {
-  width: 100%;
-  background-color: transparent;
-  border-color: var(--color-0);
-  color: var(--color-text);
-}
-
-.card .dropdown .button:hover {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
 .taskList {
   width: 100%;
   -webkit-box-flex: 1;
@@ -446,217 +292,262 @@ input:focus-visible {
   opacity: 30%;
 }
 
-.col1 {
-  max-width: 350px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-}
-
-.col1:focus, .col1:focus-visible {
-  border: none;
-  outline: none;
-}
-
-.col2 {
-  width: 40px;
-  height: 40px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-.col2.contact {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border: 2px solid white;
-}
-
-.col3 {
-  width: 180px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-.col3.incharge {
-  height: 40px;
-  line-height: 40px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  cursor: pointer;
-}
-
-.col3.users-incharge {
-  width: 180px;
-}
-
-.col4 {
-  width: 120px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-.col4.deadline {
-  height: 40px;
-  line-height: 40px;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.deadline, .start, .end {
+.card-tasksList {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 8px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 16px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
-.deadline .material-symbols-outlined, .start .material-symbols-outlined, .end .material-symbols-outlined {
-  line-height: 40px;
-}
-
-.deadline .react-calendar, .start .react-calendar, .end .react-calendar {
-  top: 60px;
-  position: absolute;
-  z-index: 99;
-  background-color: var(--color-20);
+.card {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  padding: 16px;
   border-radius: 16px;
-  -webkit-box-shadow: var(--ds-lv1);
-          box-shadow: var(--ds-lv1);
-  border: 1px solid var(--color-0);
-  font-family: "Inter",sans-serif;
-  font-size: 12px;
+  height: auto;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+  z-index: 0;
+}
+
+.card .background-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.card .background-card::before, .card .background-card::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.card .background-card::before {
+  bottom: 0;
+  height: 200%;
+  background-color: transparent;
+  background: -webkit-gradient(linear, left bottom, left top, from(black), to(rgba(0, 0, 0, 0)));
+  background: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+  z-index: 2;
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
-  -webkit-transition: all 300ms ease;
-  transition: all 300ms ease;
-  padding: 16px;
-  max-width: none;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
 }
 
-.deadline .react-calendar button, .start .react-calendar button, .end .react-calendar button {
-  border-radius: 4px;
+.card .background-card img {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
-.deadline .react-calendar.is-active, .start .react-calendar.is-active, .end .react-calendar.is-active {
+.card .card-trigger {
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+}
+
+.card .card-trigger-header {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-bottom: 40px;
+}
+
+.card .card-trigger-header-incharge {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.card .card-trigger-header-incharge .card-trigger-time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  gap: 32px;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.card .card-trigger-header-incharge .card-trigger-time .card-time {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 2px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.card .card-trigger-header-incharge .card-trigger-time .card-time span.material-symbols-outlined {
+  font-size: 16px;
+  line-height: auto;
+}
+
+.card .card-trigger-header-incharge .userselect.dropdown .dropdown-trigger .button {
+  background-color: transparent;
+}
+
+.card .card-trigger-header-incharge .dropdown.is-right {
+  min-width: 100px;
+}
+
+.card .card-trigger-header-incharge .dropdown.is-right .dropdown-trigger {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card .card-trigger-header-incharge .dropdown.is-right .dropdown-trigger .button {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: transparent;
+  border: 1px solid var(--color-text);
+}
+
+.card .card-trigger .card-content {
+  width: 100%;
+  border: none;
+  padding: 0;
+}
+
+.card .card-trigger .card-content-header {
+  width: 100%;
+}
+
+.card .card-trigger .card-content-header.is-active p {
+  max-height: 200px;
   opacity: 1;
-  visibility: visible;
-  pointer-events: all;
 }
 
-.deadline .react-calendar .react-calendar__navigation button:enabled:hover, .start .react-calendar .react-calendar__navigation button:enabled:hover, .end .react-calendar .react-calendar__navigation button:enabled:hover {
-  background-color: #252525;
-}
-
-.deadline .react-calendar .react-calendar__navigation button:enabled:focus, .start .react-calendar .react-calendar__navigation button:enabled:focus, .end .react-calendar .react-calendar__navigation button:enabled:focus {
-  background-color: var(--color-20);
-}
-
-.deadline .react-calendar .react-calendar__navigation, .start .react-calendar .react-calendar__navigation, .end .react-calendar .react-calendar__navigation {
-  height: 32px;
-}
-
-.deadline .react-calendar .react-calendar__viewContainer abbr, .start .react-calendar .react-calendar__viewContainer abbr, .end .react-calendar .react-calendar__viewContainer abbr {
-  font-weight: 400;
-  text-decoration: none;
-}
-
-.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile--now, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile--now, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile--now {
-  background-color: var(--color-40);
-  border-radius: 4px;
-}
-
-.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile--now abbr, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile--now abbr, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile--now abbr {
+.card .card-trigger .card-content-header h1 {
+  font-size: 20px;
   font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
 }
 
-.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile:enabled:focus, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile:enabled:focus, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile:enabled:focus {
-  background-color: var(--color-0);
-  border-radius: 4px;
+.card .card-trigger .card-content-header p {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+  margin-bottom: 4px;
 }
 
-.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile:hover, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile:hover, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile:hover {
-  background-color: #252525;
+.card .card-trigger .card-content-main {
+  margin-top: 0;
+  color: var(--color-text);
+  opacity: 0;
+  max-height: 0;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+  overflow: hidden;
 }
 
-.deadline .react-calendar .react-calendar__viewContainer .react-calendar__month-view__days__day--weekend, .start .react-calendar .react-calendar__viewContainer .react-calendar__month-view__days__day--weekend, .end .react-calendar .react-calendar__viewContainer .react-calendar__month-view__days__day--weekend {
-  color: var(--color-main);
+.card .card-trigger .card-content-main.is-active {
+  margin-top: 16px;
+  opacity: 1;
+  max-height: 1000px;
 }
 
-.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile--active, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile--active, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile--active {
-  background-color: var(--color-0);
-  border-radius: 4px;
+.card .card-trigger .card-content-main .brief {
+  margin-bottom: 16px;
 }
 
-.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile--hasActive, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile--hasActive, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile--hasActive {
-  background-color: var(--color-0);
+.card .card-trigger .card-content-main .brief, .card .card-trigger .card-content-main .note {
+  min-width: 100%;
 }
 
-.col5 {
-  width: 120px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+.card .card-trigger .card-content-main .brief h1, .card .card-trigger .card-content-main .note h1 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  opacity: 0.8;
+  margin-bottom: 8px;
 }
 
-.col5.start {
-  height: 40px;
-  line-height: 40px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  cursor: pointer;
+.card .card-trigger .card-content-main .brief div, .card .card-trigger .card-content-main .note div {
+  width: 100%;
+  font-size: 14px;
 }
 
-.col6 {
-  width: 120px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-.col6.end, .col6.start, .col6.deadline {
-  height: 40px;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  line-height: 40px;
-}
-
-.col7 {
-  width: 90px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  position: relative;
-}
-
-.col7.cost {
+.card .card-trigger .card-content-main .cost {
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 2px;
   height: 40px;
   line-height: 40px;
   cursor: pointer;
   position: relative;
 }
 
-.col7.cost span.is-editing::after {
+.card .card-trigger .card-content-main .cost span:nth-of-type(2)::after {
+  content: ' VNĐ';
+}
+
+.card .card-trigger .card-content-main .cost span.is-editing::after {
   content: '|';
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
@@ -664,7 +555,20 @@ input:focus-visible {
           animation: wordCursor 1000ms infinite;
 }
 
-.col7.cost.input {
+.card .card-trigger .card-content-main .cost .tag {
+  left: 0;
+  top: -10px;
+}
+
+.card .card-trigger .card-content-main .cost:hover .tag {
+  opacity: 1;
+  visibility: visible;
+  top: -20px;
+  -webkit-transition-delay: 300ms;
+          transition-delay: 300ms;
+}
+
+.card .card-trigger .card-content-main .cost.input {
   position: absolute;
   background-color: transparent;
   border: none;
@@ -685,51 +589,51 @@ input:focus-visible {
   -o-user-select: none;
 }
 
-.col7.cost:focus, .col7.cost:focus-visible {
+.card .card-trigger .card-content-main .cost:focus, .card .card-trigger .card-content-main .cost:focus-visible {
   border: none;
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.col8 {
-  width: 120px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-.users {
+.card .card-trigger .card-content-main .action-button {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 4px;
-  -ms-flex-line-pack: start;
-      align-content: flex-start;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  gap: 16px;
+  margin-top: 16px;
 }
 
-.users .user-avatar {
-  display: block;
-  width: 32px;
-  height: 32px;
+.card:hover {
+  z-index: 1;
 }
 
-.users .user-name {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+.card:hover .background-card::after {
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+}
+
+.card:hover .background-card::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.card[style="width: 100%"] .background-card::before {
+  bottom: 0;
+  opacity: 0.6;
+}
+
+.card[style="width: 100%"] .background-card::after {
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
 }
 
 .users-incharge.dropdown {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 200px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -741,7 +645,7 @@ input:focus-visible {
 }
 
 .users-incharge.dropdown .tag {
-  top: -20px;
+  top: 20px;
 }
 
 .users-incharge.dropdown:hover .tag {
@@ -750,6 +654,15 @@ input:focus-visible {
   top: -30px;
   -webkit-transition-delay: 300ms;
           transition-delay: 300ms;
+}
+
+.users-incharge.dropdown .dropdown-trigger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .users-incharge.dropdown .dropdown-trigger .button {
@@ -836,93 +749,102 @@ input:focus-visible {
   font-weight: 500;
 }
 
-.card-header-content {
-  width: 100%;
+.deadline, .start, .end {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  gap: 24px;
+  gap: 8px;
 }
 
-.card-main-content {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  max-height: 0;
+.deadline .material-symbols-outlined, .start .material-symbols-outlined, .end .material-symbols-outlined {
+  line-height: 40px;
+}
+
+.deadline .react-calendar, .start .react-calendar, .end .react-calendar {
+  top: 42px;
+  position: absolute;
+  z-index: 99;
+  background-color: var(--color-20);
+  border-radius: 16px;
+  -webkit-box-shadow: var(--ds-lv1);
+          box-shadow: var(--ds-lv1);
+  border: 1px solid var(--color-0);
+  font-family: "Inter",sans-serif;
+  font-size: 12px;
   opacity: 0;
-  visibility: 0;
+  visibility: hidden;
   pointer-events: none;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  padding: 16px;
+  max-width: none;
 }
 
-.card-main-content.is-active {
-  pointer-events: all;
-  max-height: 500px;
+.deadline .react-calendar button, .start .react-calendar button, .end .react-calendar button {
+  border-radius: 4px;
+}
+
+.deadline .react-calendar.is-active, .start .react-calendar.is-active, .end .react-calendar.is-active {
   opacity: 1;
-  visibility: 1;
-  margin-top: 16px;
+  visibility: visible;
+  pointer-events: all;
 }
 
-.card-main-content .brief, .card-main-content .note {
-  width: calc(50% - 8px);
-  margin-bottom: 16px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+.deadline .react-calendar .react-calendar__navigation button:enabled:hover, .start .react-calendar .react-calendar__navigation button:enabled:hover, .end .react-calendar .react-calendar__navigation button:enabled:hover {
+  background-color: #252525;
 }
 
-.card-main-content .brief h1, .card-main-content .note h1 {
-  font-size: 14px;
+.deadline .react-calendar .react-calendar__navigation button:enabled:focus, .start .react-calendar .react-calendar__navigation button:enabled:focus, .end .react-calendar .react-calendar__navigation button:enabled:focus {
+  background-color: var(--color-20);
+}
+
+.deadline .react-calendar .react-calendar__navigation, .start .react-calendar .react-calendar__navigation, .end .react-calendar .react-calendar__navigation {
+  height: 32px;
+}
+
+.deadline .react-calendar .react-calendar__viewContainer abbr, .start .react-calendar .react-calendar__viewContainer abbr, .end .react-calendar .react-calendar__viewContainer abbr {
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile--now, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile--now, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile--now {
+  background-color: var(--color-40);
+  border-radius: 4px;
+}
+
+.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile--now abbr, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile--now abbr, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile--now abbr {
   font-weight: 700;
-  margin-bottom: 8px;
-  opacity: 0.4;
 }
 
-.card-main-content .brief div, .card-main-content .note div {
-  width: 100%;
-  height: 100%;
-  min-height: 100px;
-  background-color: transparent;
-  padding: 8px;
-  border-radius: 8px;
-  resize: none;
+.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile:enabled:focus, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile:enabled:focus, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile:enabled:focus {
+  background-color: var(--color-0);
+  border-radius: 4px;
+}
+
+.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile:hover, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile:hover, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile:hover {
+  background-color: #252525;
+}
+
+.deadline .react-calendar .react-calendar__viewContainer .react-calendar__month-view__days__day--weekend, .start .react-calendar .react-calendar__viewContainer .react-calendar__month-view__days__day--weekend, .end .react-calendar .react-calendar__viewContainer .react-calendar__month-view__days__day--weekend {
+  color: var(--color-main);
+}
+
+.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile--active, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile--active, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile--active {
+  background-color: var(--color-0);
+  border-radius: 4px;
+}
+
+.deadline .react-calendar .react-calendar__viewContainer .react-calendar__tile--hasActive, .start .react-calendar .react-calendar__viewContainer .react-calendar__tile--hasActive, .end .react-calendar .react-calendar__viewContainer .react-calendar__tile--hasActive {
+  background-color: var(--color-0);
+}
+
+*[contenteditable="true"] {
+  padding: 4px 8px;
   border: 1px solid var(--color-40);
+  border-radius: 4px;
 }
 
-.card-main-content .brief div:focus, .card-main-content .note div:focus {
+*[contenteditable="true"]:focus {
   outline: none;
-  border-width: 2px;
-}
-
-.card-main-content .action-button {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  gap: 16px;
-}
-
-.card-main-content .action-button .button {
-  width: 120px;
 }
 /*# sourceMappingURL=Tasks.css.map */

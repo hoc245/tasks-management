@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { uid } from 'uid';
-import { ref, onChildAdded, onChildRemoved, onChildChanged, onValue } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import {auth , db} from '../firebase';
 import Dropdown from "../components/Dropdown";
 import CompanyTask from "../components/CompanyTask";
@@ -56,7 +56,7 @@ export default function Tasks() {
   const openModal = () => {
     var modal = document.getElementById("modal");
     if(modal) {
-      modal.classList.add('is-active')
+      modal.classList.add('is-active');
     }
   }
   // onChildAdded(ref(db, `/tasks/`),(data) => {

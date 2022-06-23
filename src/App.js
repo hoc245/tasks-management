@@ -1,4 +1,4 @@
-import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect } from "react";
 import {auth} from './firebase';
 import { signOut } from "firebase/auth";
@@ -30,18 +30,18 @@ export default function App() {
   return (
     <div className="app">
       <nav className="nav">
-        <NavLink className={({isActive}) => isActive ? "nav-item is-active" : "nav-item"} to="/dashboard">
+        <Link className={ location.pathname === "/dashboard" ? "nav-item is-active" : "nav-item"} to="/dashboard">
           <span>Home</span>
           <span className="material-symbols-outlined">home</span>
-        </NavLink>
-        <NavLink className={({isActive}) => isActive ? "nav-item is-active" : "nav-item"} to="/tasks">
+        </Link>
+        <Link className={location.pathname === "/tasks" ? "nav-item is-active" : "nav-item"} to="/tasks">
           <span>Tasks</span>
           <span className="material-symbols-outlined">task</span>
-        </NavLink>
-        <NavLink className={({isActive}) => isActive ? "nav-item is-active" : "nav-item"} to="/profile">
+        </Link>
+        <Link className={location.pathname === "/profile" ? "nav-item is-active" : "nav-item"} to="/profile">
           <span>Profile</span>
           <span className="material-symbols-outlined">settings</span>
-        </NavLink>
+        </Link>
         <span className="indicator"></span>
       </nav>
       <Button value={""} icon={"logout"} className={"button is-primary logout"} onClick={() => {logOut()}}/>

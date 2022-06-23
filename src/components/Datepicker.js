@@ -9,17 +9,16 @@ export default function Datepicker({value,onChange,type=""}) {
     const openCalendar = (e) => {
         var calendarList = document.getElementsByClassName('react-calendar');
         if(e.currentTarget) {
-            for (let i = 0 ; i < calendarList.length ; i++ ) {
-                calendarList[i].classList.remove('is-active')
-            }
-            e.currentTarget.children[2].classList.add('is-active');
+            if(e.currentTarget.children[2].classList.contains('is-active')) {
+                e.currentTarget.children[2].classList.remove('is-active');
+            } else {
+                for (let i = 0 ; i < calendarList.length ; i++ ) {
+                    calendarList[i].classList.remove('is-active')
+                }
+                e.currentTarget.children[2].classList.add('is-active');
+            }            
         }
     }
-    [].forEach.call(document.getElementsByClassName('react-calendar'),(item) => {
-        item.addEventListener('mouseleave',() => {
-            item.classList.remove('is-active')
-        })
-    })
     return (
         <div className={type + " col6 card-time"} onClick={(e) => openCalendar(e)}>
             <span className="material-symbols-outlined">
