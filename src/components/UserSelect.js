@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {uid} from "uid";
 
-export default function UserSelect({defaultValue,valueList,type = "",onChange}) {
+export default function UserSelect({defaultValue,valueList,disable = false,type = "",onChange}) {
     const [current,setCurrent] = useState(defaultValue);
     // Select Value
     const changeValue = (e) => {
@@ -16,7 +16,11 @@ export default function UserSelect({defaultValue,valueList,type = "",onChange}) 
     }
     // toggle Dropdown
     const toggleDropdown = (e) => {
-        e.currentTarget.classList.toggle('is-active');
+        if(disable) {
+            return false;
+        } else {
+            e.currentTarget.classList.toggle('is-active');
+        }
     }
     if(defaultValue && valueList) {
         return (

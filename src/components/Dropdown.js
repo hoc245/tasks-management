@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { uid } from "uid";
 
-export default function Button({defaultValue,valueList,type = "",onChange}) {
+export default function Button({defaultValue,valueList,type = "",onChange,disable = false}) {
     const [current,setCurrent] = useState();
     useEffect(() => {
         setCurrent(defaultValue);
@@ -19,15 +19,19 @@ export default function Button({defaultValue,valueList,type = "",onChange}) {
     // toggle Dropdown
     const toggleDropdown = (e) => {
         var dropdown = document.querySelectorAll('.dropdown');
-        if(e.currentTarget.classList.contains('is-active')) {
-            [].forEach.call(dropdown, (item) => {
-                item.classList.remove('is-active')
-            })
+        if(disable) {
+            return false;
         } else {
-            [].forEach.call(dropdown, (item) => {
-                item.classList.remove('is-active')
-            })
-            e.currentTarget.classList.add('is-active');
+            if(e.currentTarget.classList.contains('is-active')) {
+                [].forEach.call(dropdown, (item) => {
+                    item.classList.remove('is-active')
+                })
+            } else {
+                [].forEach.call(dropdown, (item) => {
+                    item.classList.remove('is-active')
+                })
+                e.currentTarget.classList.add('is-active');
+            }
         }
 
     }

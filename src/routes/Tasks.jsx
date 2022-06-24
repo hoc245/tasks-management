@@ -21,6 +21,8 @@ export default function Tasks() {
     end : true,
     state : true,
   });
+  var newTaskList = taskList;
+  const currentUser = auth.currentUser.uid;
   const monthFilter = getMonthFilter();
   const stateFilter = getStateFilter();
   var loginState = parseInt(localStorage.getItem('loginState'));
@@ -93,9 +95,18 @@ export default function Tasks() {
       })
     }
   }
+  if(allUsers && taskList) {
+    if(allUsers[currentUser].permission !== "Admin") {
+      newTaskList = taskList.filter(item => {
+        if(item.incharge === currentUser || item.creator === currentUser) {
+          return item
+        }
+      })
+    }
+  }
   return (
     <div className="section is-active">
-      {taskList && allCompany && allUsers && auth.currentUser ?
+      {taskList && allCompany && allUsers && currentUser ?
       <>
         <div key={`toolbar${uid()}`} className="toolbar">
           <Dropdown defaultValue={`${filterTasks.company === true? "Company" : filterTasks.company}`} valueList={Object.values(allCompany)} onChange={(e) => {filterTask(e,"Company")}}/>
@@ -126,7 +137,7 @@ export default function Tasks() {
             return <CompanyTask 
                       key={item.id} 
                       company={item} 
-                      tasks={taskList === [] ? [] : taskList.filter((task) => {
+                      tasks={newTaskList === [] ? [] : newTaskList.filter((task) => {
                         var company = task.company === item.id ? true : false;
                         var state = filterTasks.state === true? true : task.state === filterTasks.state;
                         var deadline = filterTasks.deadline === true? true : monthFilter[new Date(task.deadline).getMonth()].name === filterTasks.deadline;

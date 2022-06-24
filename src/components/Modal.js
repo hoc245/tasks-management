@@ -80,7 +80,6 @@ export default function Modal({company,currentUser,alluser,...rootDOMAttributes}
             draftTask.des = document.getElementById(`addDes`).value;
             draftTask.brief = document.getElementById(`addBrief`).innerHTML;
             draftTask.note = document.getElementById(`addNote`).innerHTML;
-            draftTask.company = company.filter(item => item.id === currentUser.company)[0].id;
             addTask(draftTask);
         }).then(() => {
             setDraftTask({
@@ -126,7 +125,7 @@ export default function Modal({company,currentUser,alluser,...rootDOMAttributes}
                             <UserSelect defaultValue={currentUser} valueList={alluser} onChange={(e) => {draftTask.incharge = e}}/>
                             <Datepicker value={toDay} type="deadline" onChange={(e) => {handleCalendar(e)}}/>
                             <Dropdown defaultValue={draftTask.state} valueList={stateFilter} type={"is-right"} onChange={(e) => {draftTask.state = e}}/>
-                            <Dropdown defaultValue={company.filter(item => item.id === currentUser.company)[0].name} valueList={company} type={"is-right"} onChange={(e) => {draftTask.company = company.filter(item => item.name === e)[0].id}}/>
+                            <Dropdown defaultValue={company.filter(item => item.id === currentUser.company)[0].name} valueList={company} type={"is-right"} onChange={(e) => {draftTask.company = company.filter(item => item.name === e)[0].id;console.log(draftTask)}}/>
                         </div>
                         <div id={draftTask.id} className="card-main-content is-active">
                             <div className="brief">

@@ -2,21 +2,25 @@ import React ,{useState}from "react";
 import Calendar from 'react-calendar';
 import {uid} from "uid";
 
-export default function Datepicker({value,onChange,type=""}) {
+export default function Datepicker({value,onChange,type="",disable = false}) {
     const uidd = uid();
     const [date,setDate] = useState(new Date(value));
     const dateToString = `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,"0")}-${(date.getDate()).toString().padStart(2,"0")}`;
     const openCalendar = (e) => {
         var calendarList = document.getElementsByClassName('react-calendar');
-        if(e.currentTarget) {
-            if(e.currentTarget.children[2].classList.contains('is-active')) {
-                e.currentTarget.children[2].classList.remove('is-active');
-            } else {
-                for (let i = 0 ; i < calendarList.length ; i++ ) {
-                    calendarList[i].classList.remove('is-active')
-                }
-                e.currentTarget.children[2].classList.add('is-active');
-            }            
+        if(disable) {
+            return false;
+        } else {
+            if(e.currentTarget) {
+                if(e.currentTarget.children[2].classList.contains('is-active')) {
+                    e.currentTarget.children[2].classList.remove('is-active');
+                } else {
+                    for (let i = 0 ; i < calendarList.length ; i++ ) {
+                        calendarList[i].classList.remove('is-active')
+                    }
+                    e.currentTarget.children[2].classList.add('is-active');
+                }            
+            }
         }
     }
     return (

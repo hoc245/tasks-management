@@ -84,7 +84,7 @@ export default function Task({task,alluser,incharge}) {
             taskDetail.classList.add('is-active');
             document.querySelector(`[id="${task.id}"] .card-content-header`).classList.add('is-active');
             document.querySelector(`[id="${task.id}"]`).setAttribute('style','width: 100%');
-            if(userIncharge.id === currentUser || task.creator === currentUser) {
+            if(userIncharge.id === currentUser || task.creator === currentUser || alluser[currentUser].permission === "Admin") {
                 taskTitle.setAttribute('contenteditable',true);
                 taskDes.setAttribute('contenteditable',true);
                 taskBrief.setAttribute('contenteditable',true);
@@ -93,39 +93,55 @@ export default function Task({task,alluser,incharge}) {
         }
     }
     const handleIncharge = (e) => {
-        task.incharge = e;
-        updateTask(task);
-        setUserIncharge(alluser[e]);
-    }
-    const handleDeleteButton = () => {
-        removeTask(task);
-    }
-    const handleContentInput = (e) => {
-        if (e.keyCode === 13) {
-            document.execCommand("defaultParagraphSeparator", false, "br");
+        if(alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator) {
+            task.incharge = e;
+            updateTask(task);
+            setUserIncharge(alluser[e]);
+        } else {
             return false;
         }
-        if(e.keyCode === 9) {
-            document.execCommand('insertHTML', false, '&#009');
-            //prevent focusing on next element
-            e.preventDefault()
+    }
+    const handleDeleteButton = () => {
+        if(alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator) {
+            removeTask(task);
+        } else {
+            return false;
         }
-        e.currentTarget.addEventListener('paste', function (ele) {
-            ele.preventDefault()
-            var text = ele.clipboardData.getData('text/plain')
-            document.execCommand('insertText', false, text)
-          })
+    }
+    const handleContentInput = (e) => {
+        if(alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator) {
+            if (e.keyCode === 13) {
+                document.execCommand("defaultParagraphSeparator", false, "br");
+                return false;
+            }
+            if(e.keyCode === 9) {
+                document.execCommand('insertHTML', false, '&#009');
+                //prevent focusing on next element
+                e.preventDefault()
+            }
+            e.currentTarget.addEventListener('paste', function (ele) {
+                ele.preventDefault()
+                var text = ele.clipboardData.getData('text/plain')
+                document.execCommand('insertText', false, text)
+            })
+        } else {
+            return false;
+        }
     }
     const handleUpdateButton = () => {
         const brief = document.getElementById(`taskbrief${task.id}`);
         const note = document.getElementById(`tasknote${task.id}`);
         const title = document.getElementById(`title${task.id}`);
         const des = document.getElementById(`des${task.id}`);
-        task.brief = brief.innerHTML;
-        task.note = note.innerHTML;
-        task.title = title.innerHTML;
-        task.des = des.innerHTML;
-        updateTask(task);
+        if(alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator) {
+            task.brief = brief.innerHTML;
+            task.note = note.innerHTML;
+            task.title = title.innerHTML;
+            task.des = des.innerHTML;
+            updateTask(task);
+        } else {
+            return false;
+        }
     }
     if(task) {
         return(
@@ -133,13 +149,13 @@ export default function Task({task,alluser,incharge}) {
                 <div className="card-trigger">
                     <div className="card-trigger-header">
                         <div className="card-trigger-header-incharge">
-                            <UserSelect defaultValue={userIncharge} valueList={alluser} onChange={(e) => {handleIncharge(e)}}/>
+                            <UserSelect disable={alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator ? false : true} defaultValue={userIncharge} valueList={alluser} onChange={(e) => {handleIncharge(e)}}/>
                             <div className="card-trigger-time">
-                                <Datepicker type={"deadline"} value={task.deadline} onChange={(e) => {handleCalendar(e,"deadline")}}/>
-                                <Datepicker type={"start"} value={task.start} onChange={(e) => {handleCalendar(e,"start")}}/>
-                                <Datepicker type={"end"} value={task.end} onChange={(e) => {handleCalendar(e,"end")}}/>
+                                <Datepicker disable={alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator ? false : true} type={"deadline"} value={task.deadline} onChange={(e) => {handleCalendar(e,"deadline")}}/>
+                                <Datepicker disable={alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator ? false : true} type={"start"} value={task.start} onChange={(e) => {handleCalendar(e,"start")}}/>
+                                <Datepicker disable={alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator ? false : true} type={"end"} value={task.end} onChange={(e) => {handleCalendar(e,"end")}}/>
                             </div>
-                            <Dropdown defaultValue={task.state} valueList={stateFilter} type={"is-right"} onChange={(e) => {handleStateChange(e)}}/>
+                            <Dropdown disable={alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator ? false : true} defaultValue={task.state} valueList={stateFilter} type={"is-right"} onChange={(e) => {handleStateChange(e)}}/>
                         </div>
                     </div>
                     <div className="card-content">
