@@ -2,7 +2,20 @@ import React, {useState} from "react";
 import {uid} from "uid";
 
 export default function UserSelect({defaultValue,valueList,disable = false,type = "",onChange}) {
-    const [current,setCurrent] = useState(defaultValue);
+    const [current,setCurrent] = useState(() => {
+        if(defaultValue.permission === "Designer") {
+            return defaultValue;
+        } else {
+            if(Object.values(valueList).filter(item => item.permission === "Designer") === []) {
+                return Object.values(valueList).filter(item => item.permission === "Designer")[0]
+            } else {
+                return {
+                    avatar : "",
+                    name : "Choose a designer"
+                }
+            }
+        }
+    });
     // Select Value
     const changeValue = (e) => {
         const id = e.currentTarget.getAttribute('data-id')

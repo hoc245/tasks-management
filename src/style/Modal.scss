@@ -168,7 +168,14 @@
         }
         .modal-card-foot {
             background-color: transparent;
+            position: relative;
             border-color: var(--color-0);
+            .notification {
+                width: fit-content;
+                bottom:auto;
+                left:auto;
+                right:16px;
+            }
         }
     }
 }

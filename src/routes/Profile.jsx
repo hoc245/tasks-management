@@ -52,8 +52,13 @@ export default function Profile() {
     }).catch(error => console.log(error)).then(() => {
         update(ref(db , `/users/${currentUser.id}`),draftUser)
     }).then(() => {
-        setCurrentUser(draftUser)
+        setCurrentUser(draftUser);
     });
+    document.querySelector('.notification span').innerHTML = "Profile updated";
+    document.querySelector('.notification').classList.add('is-active');
+    setTimeout(() => {
+      document.querySelector('.notification').classList.remove('is-active')
+    },1500)
   }
   const handleChangePassword = (e,type) => {
     if (type === "password") {
@@ -72,6 +77,12 @@ export default function Profile() {
             .catch(error => console.log(error))
             .then(url => {draftUser.avatar = url})
             .then(() => upProfile())
+        }).then(() => {
+          document.querySelector('.notification span').innerHTML = "Avatar updated";
+          document.querySelector('.notification').classList.add('is-active');
+          setTimeout(() => {
+            document.querySelector('.notification').classList.remove('is-active')
+          },1500)
         })
   }
   const handleChange = (e,type) => {
@@ -107,6 +118,10 @@ export default function Profile() {
                   <Dropdown defaultValue={allCompanys.filter(item => item.id === currentUser.company)[0].name} valueList={allCompanys} onChange={(e) => {draftUser.company = allCompanys.filter(item => item.name === e)[0].id}}/>
               </div>
               <Button value={"Update"} type={"is-primary"} icon={"update"} onClick={(e) => {e.preventDefault();upProfile()}}/>
+              <div className="notification">
+                <button className="delete" onClick={(e) => e.currentTarget.parentElement.classList.remove('is-active')}></button>
+                <span>Profile updated</span>
+              </div>
           </div>
       </div>
     );

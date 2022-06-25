@@ -23,14 +23,7 @@ root.render(
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="tasks-management" element={<Dashboard />} />
           <Route path="tasks" element={<Tasks />}>
-          <Route
-              index
-              element={
-              <main style={{ padding: "1rem" }}>
-                  <p>Select an invoice</p>
-              </main>
-              }
-          />
+            <Route path="*" element={<Tasks />}/>
           </Route>
           <Route path="profile" element={<Profile />} />
           <Route

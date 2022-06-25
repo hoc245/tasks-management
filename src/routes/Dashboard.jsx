@@ -4,7 +4,7 @@ import {uid} from 'uid';
 import {auth , db} from '../firebase';
 import { update, ref, onValue } from "firebase/database";
 import {useNavigate} from "react-router-dom";
-import { getStateFilter } from "../components/filterData"
+import { getStateFilter } from "../components/filterData";
 
 function CreateMyTask({task}) {
     const mTask = task;
@@ -14,13 +14,13 @@ function CreateMyTask({task}) {
     }
     return(
         <tr>
-            <th><p>{mTask.title}</p><p>{mTask.des}</p></th>
+            <th><a href={`/tasks/${mTask.id}`}><p>{mTask.title}</p><p>{mTask.des}</p></a></th>
             <th>{mTask.deadline.split('-').reverse().join('-')}</th>
-            <th width={"120"} className="dropdown-state"><Dropdown defaultValue={mTask.state} type={"is-right"} valueList={getStateFilter()} onChange={(e) => {updateState(e)}}/></th>
+            <th width={"120"} className="dropdown-state"><Dropdown key={`myTask${mTask.id}`} defaultValue={mTask.state} type={"is-right"} valueList={stateFilter} onChange={(e) => {updateState(e)}}/></th>
         </tr>
     )
 }
-
+const stateFilter = getStateFilter();
 export default function Dashboard() {
     const navigate = useNavigate();
     const [taskList,setTaskList] = useState();
@@ -29,6 +29,7 @@ export default function Dashboard() {
     var totalCost = taskList && dollarUSLocale.format(taskList.reduce((partialSum, a) => partialSum + parseInt(a.cost),0));
     var yourCost = taskList && dollarUSLocale.format(taskList.filter(item => item.incharge === auth.currentUser.uid).reduce((partialSum, a) => partialSum + parseInt(a.cost),0));
     var waitingTasksCost = taskList && dollarUSLocale.format(taskList.filter(item => item.incharge === null).reduce((partialSum, a) => partialSum + parseInt(a.cost),0));
+    let sortedTask = [];
     const today = new Date();
     useEffect(() => {
         auth.onAuthStateChanged(user => {
@@ -44,6 +45,26 @@ export default function Dashboard() {
             }
         })
     },[])
+    useEffect(() => {
+        var doneTask = document.querySelectorAll('.yourTasks tr');
+        [].forEach.call(doneTask, item => {
+
+            if(item.querySelector('.dropdown .button span') && item.querySelector('.dropdown .button span').innerHTML === "Done") {
+                item.classList.add('has-done');
+            }
+        })
+    })
+    if(taskList) {
+        sortedTask = taskList.sort((a,b) => {
+            var idA = stateFilter.find(ele => {if(ele.name === a.state) { return ele }}).id;
+            var idB = stateFilter.find(ele => {if(ele.name === b.state) { return ele }}).id;
+            if(idA < idB) {
+                return -1;
+            } else {
+                return 1;
+            }
+        })
+    }
     if(taskList) {
         return (
             <div className="Dashboard">
@@ -94,15 +115,14 @@ export default function Dashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {taskList.map(item => {
+                            {sortedTask.map(item => {
                                 if(item.incharge === auth.currentUser.uid) {
-                                    return <CreateMyTask task={item}/>
+                                    return <CreateMyTask key={item.id} task={item}/>
                                 }
                             })}
                         </tbody>
                     </table>
                 </div>
-    
             </div>
         )
     }

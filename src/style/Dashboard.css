@@ -5,13 +5,11 @@
   margin-top: 80px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
   -ms-flex-line-pack: start;
       align-content: flex-start;
   gap: 16px;
   width: 100%;
+  max-width: 1200px;
 }
 
 .Dashboard .dashboard-section {
@@ -20,6 +18,9 @@
   border: 1px solid var(--color-0);
   padding: 16px;
   border-radius: 16px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .Dashboard .dashboard-section.is-fullwidth {
@@ -149,6 +150,19 @@
 
 .Dashboard .userList th:nth-child(2), .Dashboard th:nth-child(3) {
   text-align: center;
+}
+
+.Dashboard .yourTasks th:not(.dropdown-state) a {
+  color: inherit;
+}
+
+.Dashboard .yourTasks th:not(.dropdown-state):nth-of-type(2) {
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 30px;
+  vertical-align: text-top;
 }
 
 .Dashboard .totalCost {

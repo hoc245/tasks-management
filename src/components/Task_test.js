@@ -8,8 +8,9 @@ import Dropdown from "./Dropdown";
 import { updateTask , removeTask } from "./modifiTask";
 import { getStateFilter } from "../components/filterData";
 import UserSelect from "./UserSelect";
+import { useHref, useLocation } from "react-router-dom";
 
-export default function Task({task,alluser,incharge}) { 
+export default function Task({task,alluser,incharge,scrollTo = false}) { 
     const currentUser = auth.currentUser.uid;
     const [userIncharge,setUserIncharge] = useState(incharge ? incharge : {
         avatar : "",
@@ -21,6 +22,14 @@ export default function Task({task,alluser,incharge}) {
         const note = document.getElementById(`tasknote${task.id}`);
         brief.innerHTML = task.brief;
         note.innerHTML = task.note;
+        if(scrollTo) {
+            console.log(document.getElementById(task.id));
+            document.getElementById(task.id).scrollIntoView({
+                block : "center",
+                behavior : "smooth"
+            });
+            openTask()
+        }
     })
     const stateFilter = getStateFilter();
     let dollarUSLocale = Intl.NumberFormat('en-US');
@@ -31,6 +40,12 @@ export default function Task({task,alluser,incharge}) {
             updateTask(task);
         }
     }
+    useEffect(() => {
+        var item = document.querySelector(`.card[id="${task.id}"]`);
+        if(item && item.querySelector('.dropdown:not(.userselect) .button span').innerHTML === "Done") {
+            item.classList.add('has-done')
+        }
+    })
     const handleStateChange = (e) => {
         task.state = e;
         if(auth.currentUser.uid === incharge.id) {

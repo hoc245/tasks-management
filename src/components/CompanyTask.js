@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from "react";
 import Task from "./Task_test";
 import { getStateFilter } from "./filterData";
+import { useLocation } from "react-router-dom";
 
 export default function CompanyTask({company,tasks,users,deleteCallback}) {
     const [tasksList,setTasksList] = useState();
     const stateFilter = getStateFilter();
+    const currentHref = useLocation().pathname;
+    console.log(useLocation().pathname);
     useEffect(() => {
         setTasksList(tasks)
     },[tasks.length])
-    useEffect(() => {
-        const modal = document.querySelector('.modal');
-        [].forEach.call(modal.querySelectorAll('input'),item => {
-            item.value = item.defaultValue;
-        })
-    })
     if(tasksList) {
         tasksList.sort((a,b) => {
             var idA = stateFilter.find(ele => {if(ele.name === a.state) { return ele }}).id;
@@ -35,7 +32,8 @@ export default function CompanyTask({company,tasks,users,deleteCallback}) {
                     </div>
                     <div className="card-tasksList">
                         {tasksList.length ? <>{tasksList.map(task => {
-                            return <Task key={task.id} task={task} alluser={users} incharge={users[task.incharge]} deleteCallback={(e) => {deleteCallback(e)}}/>
+                            console.log(currentHref + " and " + task.id)
+                            return <Task key={task.id} scrollTo={currentHref && currentHref.includes(task.id) ? true : false} task={task} alluser={users} incharge={users[task.incharge]} deleteCallback={(e) => {deleteCallback(e)}}/>
                         })}</> : <></>}
                     </div>
                 </div>

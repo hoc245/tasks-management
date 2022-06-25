@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { uid } from "uid";
 
-export default function Button({defaultValue,valueList,type = "",onChange,disable = false}) {
-    const [current,setCurrent] = useState();
-    useEffect(() => {
-        setCurrent(defaultValue);
-    },[])
+export default function Dropdown({defaultValue,valueList,type = "",onChange,disable = false}) {
+    const [current,setCurrent] = useState(defaultValue);
     // Select Value
     const changeValue = (e) => {
         if(current === e.currentTarget.innerHTML) {

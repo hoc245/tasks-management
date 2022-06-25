@@ -6,58 +6,38 @@ import UserSelect from "./UserSelect";
 import {auth} from '../firebase';
 import { addTask } from "./modifiTask";
 import { getStateFilter } from "../components/filterData";
-import Dropdown from "./Dropdown"
-
-const template = {
-    backgroundimage : "",
-    brief : "What is it about",
-    company : ``,
-    cost : 0,
-    creator : "",
-    deadline : "",
-    des : "Description about it",
-    end : "",
-    id : "",
-    incharge : "",
-    note : "",
-    start : "",
-    state : "Waiting",
-    title : "A task title"
-}
+import Dropdown from "./Dropdown";
 
 export default function Modal({company,currentUser,alluser,...rootDOMAttributes}) {
+    let template = {
+        backgroundimage : "",
+        brief : "What is it about",
+        company : ``,
+        cost : 0,
+        creator : "",
+        deadline : "",
+        des : "Description about it",
+        end : "",
+        id : "",
+        incharge : "",
+        note : "",
+        start : "",
+        state : "Waiting",
+        title : "A task title"
+    }
     const stateFilter = getStateFilter();
     let dollarUSLocale = Intl.NumberFormat('en-US');
-    const [draftTask,setDraftTask] = useState(template);
-    const closeModal = () => {
-        const modal = document.getElementsByClassName('modal')[0];
-        modal.classList.remove('is-active')
-    }
+    const [draftTask,setDraftTask] = useState({});
     const toDay = new Date();
     const date = `${toDay.getFullYear()}-${(toDay.getMonth()+1).toString().padStart(2,"0")}-${(toDay.getDate()).toString().padStart(2,"0")}`;
     useEffect(() => {
-        const date = `${toDay.getFullYear()}-${(toDay.getMonth()+1).toString().padStart(2,"0")}-${(toDay.getDate()).toString().padStart(2,"0")}`;
-        const modal = document.querySelector('.modal');
-        [].forEach.call(modal.querySelectorAll('input'),item => {
-            item.removeAttribute('value');
-        })
-        setDraftTask({
-            backgroundimage : "",
-            brief : "What is it about",
-            company : `${currentUser.company}`,
-            cost : 0,
-            creator : auth.currentUser.uid,
-            deadline : date,
-            des : "Description about it",
-            end : date,
-            id : "",
-            incharge : auth.currentUser.uid,
-            note : "",
-            start : date,
-            state : "Waiting",
-            title : "A task title"
-        })
-    },[])
+        template.company = `${currentUser.company}`;
+        template.creator = auth.currentUser.uid;
+        template.deadline = date;
+        template.start = date;
+        template.end = date;
+        setDraftTask(template);
+    },[Object.keys(draftTask).length]);
     const handleCalendar = (value) => {
         const date = `${value.getFullYear()}-${(value.getMonth()+1).toString().padStart(2,"0")}-${(value.getDate()).toString().padStart(2,"0")}`
         draftTask.deadline = date;
@@ -73,35 +53,36 @@ export default function Modal({company,currentUser,alluser,...rootDOMAttributes}
         costView.innerHTML = dollarUSLocale.format(value);
     }
     const handleCreateTask = () => {
-        const url = `https://source.unsplash.com/random/1200x600/?design`
-        fetch(url).then((response) => draftTask.backgroundimage = response.url).then(() => {
-            draftTask.id = uid();
-            draftTask.title = document.getElementById(`addTitle`).value;
-            draftTask.des = document.getElementById(`addDes`).value;
-            draftTask.brief = document.getElementById(`addBrief`).innerHTML;
-            draftTask.note = document.getElementById(`addNote`).innerHTML;
-            addTask(draftTask);
-        }).then(() => {
-            setDraftTask({
-                backgroundimage : "",
-                brief : "What is it about",
-                company : `${currentUser.company}`,
-                cost : 0,
-                creator : auth.currentUser.uid,
-                deadline : date,
-                des : "Description about it",
-                end : date,
-                id : "",
-                incharge : auth.currentUser.uid,
-                note : "",
-                start : date,
-                state : "Waiting",
-                title : "A task title",
-            });
-        })
-        closeModal();
+        const url = `https://source.unsplash.com/random/1200x600/?design`;
+        if(document.getElementById(`addTitle`).value && document.getElementById(`addDes`).value) {
+            fetch(url).then((response) => draftTask.backgroundimage = response.url).then(() => {
+                draftTask.id = uid();
+                draftTask.title = document.getElementById(`addTitle`).value;
+                draftTask.des = document.getElementById(`addDes`).value;
+                draftTask.brief = document.getElementById(`addBrief`).innerHTML;
+                draftTask.note = document.getElementById(`addNote`).innerHTML;
+                addTask(draftTask);
+            }).then(() => {
+                document.querySelector('.notification').classList.remove('is-active');
+                document.querySelector('.notification span').innerHTML = "Task created";
+                document.querySelector('.notification').classList.remove('is-danger');
+                setTimeout(() => {
+                    document.querySelector('.notification').classList.remove('is-active');
+                    closeModal();
+                },1500)
+                setDraftTask({});
+            })
+        } else {
+            document.querySelector('.notification span').innerHTML = "Please enter title and description";
+            document.querySelector('.notification').classList.add('is-danger');
+            document.querySelector('.notification').classList.add('is-active');
+        }
     }
-    if(currentUser) {
+    const closeModal = () => {
+        const modal = document.getElementsByClassName('modal')[0];
+        modal.classList.remove('is-active')
+    }
+    if(currentUser && Object.keys(draftTask).length) {
         return(
             <div className={"modal"} {...rootDOMAttributes}>
                 <div className="modal-background" onClick={() => {closeModal()}}></div>
@@ -113,19 +94,19 @@ export default function Modal({company,currentUser,alluser,...rootDOMAttributes}
                     <section className="modal-card-body">
                         <div className="card-header-content">
                             <div className="card-title col1">
-                                <input spellCheck="false" id={`addTitle`} defaultValue={draftTask.title} className="col1"/>
-                                <input spellCheck="false" id={`addDes`} defaultValue={draftTask.des}/>
+                                <input spellCheck="false" id={`addTitle`} required placeholder={draftTask.title} className="col1"/>
+                                <input spellCheck="false" id={`addDes`} required placeholder={draftTask.des}/>
                             </div>
                             <div className="cost col7">
-                                <span id={`addCostview`}>Cost (number)</span>
+                                <span id={`addCostview`}>Cost: </span>
                                 <input type="number" pattern="([0-9]{1,3}).([0-9]{1,3})" value={draftTask.cost} onChange={(e) => {handleCost(e)}} className="input cost col7" onFocus={(e) => e.currentTarget.parentElement.children[0].classList.add('is-editing')} onBlur={(e) => {e.currentTarget.parentElement.children[0].classList.remove('is-editing');draftTask.cost = parseInt(e.currentTarget.value);}}/>
                             </div>
                         </div>
                         <div className="card-body-content">
                             <UserSelect defaultValue={currentUser} valueList={alluser} onChange={(e) => {draftTask.incharge = e}}/>
                             <Datepicker value={toDay} type="deadline" onChange={(e) => {handleCalendar(e)}}/>
-                            <Dropdown defaultValue={draftTask.state} valueList={stateFilter} type={"is-right"} onChange={(e) => {draftTask.state = e}}/>
-                            <Dropdown defaultValue={company.filter(item => item.id === currentUser.company)[0].name} valueList={company} type={"is-right"} onChange={(e) => {draftTask.company = company.filter(item => item.name === e)[0].id;console.log(draftTask)}}/>
+                            <Dropdown key={`modalState`} defaultValue={draftTask.state} valueList={stateFilter} type={"is-right"} onChange={(e) => {draftTask.state = e}}/>
+                            <Dropdown key={`modalCompany`} defaultValue={company.filter(item => item.id === draftTask.company)[0].name} valueList={company} type={"is-right"} onChange={(e) => {draftTask.company = company.filter(item => item.name === e)[0].id}}/>
                         </div>
                         <div id={draftTask.id} className="card-main-content is-active">
                             <div className="brief">
@@ -141,6 +122,10 @@ export default function Modal({company,currentUser,alluser,...rootDOMAttributes}
                     <footer className="modal-card-foot">
                     <Button value={"Add"} icon={"add"} type={"is-primary is-success"} onClick={(e) => {handleCreateTask(e)}}/>
                     <Button value={"Close"} icon={"close"} type={"is-ghost"} onClick={() => {closeModal()}}/>
+                    <div className="notification">
+                        <button className="delete" onClick={(e) => e.currentTarget.parentElement.classList.remove('is-active')}></button>
+                        <span>Task created!</span>
+                    </div>
                     </footer>
                 </div>
             </div>

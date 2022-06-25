@@ -214,3 +214,11 @@ html,body {
         margin:0;
     }
 }
+
+.has-done {
+    opacity: 0.3;
+    transition: all 300ms ease;
+    &:hover {
+        opacity: 1;
+    }
+}

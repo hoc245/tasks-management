@@ -9,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 
+let currentUser = "";
 
 export default function Tasks() {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ export default function Tasks() {
     state : true,
   });
   var newTaskList = taskList;
-  const currentUser = auth.currentUser.uid;
   const monthFilter = getMonthFilter();
   const stateFilter = getStateFilter();
   var loginState = parseInt(localStorage.getItem('loginState'));
@@ -43,6 +43,7 @@ export default function Tasks() {
         if(!user || !loginState) {
             navigate('/login');
         } else {
+          currentUser = user.uid;
           onValue(ref(db,`/users/`),(snapshot) => {
             setAllUser(Object.assign({},snapshot.val()));
           })
@@ -54,16 +55,13 @@ export default function Tasks() {
           })
         }
       })
-  },[])
+  },[]);
   const openModal = () => {
     var modal = document.getElementById("modal");
     if(modal) {
       modal.classList.add('is-active');
     }
   }
-  // onChildAdded(ref(db, `/tasks/`),(data) => {
-  //   console.log(data.val())
-  // })
   const filterTask = (value,type) => {
     if(type === "Company") {
         setFilterTasks({

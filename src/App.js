@@ -18,6 +18,7 @@ export default function App() {
         } else {
           if (location.pathname === "/tasks-management" || location.pathname === "/") {
             navigate('/dashboard');
+            location.pathname = "/dashboard"
           }
         }
     })
@@ -30,15 +31,15 @@ export default function App() {
   return (
     <div className="app">
       <nav className="nav">
-        <Link className={ location.pathname === "/dashboard" ? "nav-item is-active" : "nav-item"} to="/dashboard">
+        <Link className={ location.pathname.includes('dashboard') ? "nav-item is-active" : "nav-item"} to="/dashboard">
           <span>Home</span>
           <span className="material-symbols-outlined">home</span>
         </Link>
-        <Link className={location.pathname === "/tasks" ? "nav-item is-active" : "nav-item"} to="/tasks">
+        <Link className={location.pathname.includes('tasks') ? "nav-item is-active" : "nav-item"} to="/tasks">
           <span>Tasks</span>
           <span className="material-symbols-outlined">task</span>
         </Link>
-        <Link className={location.pathname === "/profile" ? "nav-item is-active" : "nav-item"} to="/profile">
+        <Link className={location.pathname.includes('profile') ? "nav-item is-active" : "nav-item"} to="/profile">
           <span>Profile</span>
           <span className="material-symbols-outlined">settings</span>
         </Link>
