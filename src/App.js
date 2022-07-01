@@ -9,6 +9,9 @@ import Button from "./components/Button";
 import CustomeColor from "./components/CustomeColor";
 import CustomeStyle from "./components/CustomeStyle";
 
+
+let invertColor = {};
+
 export default function App() {
   const navigate = useNavigate();
   let location = useLocation();
@@ -21,7 +24,6 @@ export default function App() {
         "--color-20": "#34302A",
         "--color-40": "#635D57",
         "--color-text" : "#ffffff",
-        "--color-variant" : "#241914",
         "--color-main" : "#e35f95",
       }
       localStorage.setItem('colorScheme',JSON.stringify(temp))
@@ -33,21 +35,13 @@ export default function App() {
   const [theme,setTheme] = useState(() => {
     if(!localStorage.getItem('theme')) {
       localStorage.setItem('theme','dark');
-      return 'dark'
+      return "dark"
     } else {
       return localStorage.getItem('theme')
     }
   })
   useEffect(() => {
     document.documentElement.setAttribute('data-theme',theme);
-    setTheme(localStorage.getItem('theme'));
-    if(theme === "dark") {
-      document.querySelector('.toggle-mode').classList.add('dark');
-      document.querySelector('.mode').classList.remove('off');
-    } else {
-      document.querySelector('.toggle-mode').classList.remove('dark');
-      document.querySelector('.mode').classList.add('off');
-    }
     auth.onAuthStateChanged(user => {
         if(!user || !loginState) {
             navigate('/login');
@@ -58,6 +52,15 @@ export default function App() {
           }
         }
     })
+  })
+  useEffect(() => {
+    if(theme === "dark") {
+      document.querySelector('.toggle-mode').classList.remove('dark');
+      document.querySelector('.mode').classList.add('off');
+    } else {
+      document.querySelector('.toggle-mode').classList.add('dark');
+      document.querySelector('.mode').classList.remove('off');
+    }
   })
   const logOut = () => {
     signOut(auth).then(() => {
@@ -73,6 +76,7 @@ export default function App() {
         tempObject[prop] = newColor[prop]
       }
     }
+    console.log(tempObject)
     if(type === "--color-bg") {
       fetch(`https://www.thecolorapi.com/scheme?hex=${tempObject["--color-bg"].replace('#','')}`)
       .then(res => res.json())
@@ -96,7 +100,7 @@ export default function App() {
       "--color-0": "#000000",
       "--color-20": "#34302A",
       "--color-40": "#635D57",
-      "--color-variant" : "#241914",
+      "--color-text": "#ffffff",
       "--color-main" : "#e35f95",
     };
     [].forEach.call(document.querySelectorAll('.react-colorful'), item => {
@@ -116,14 +120,6 @@ export default function App() {
     }
   }
   const toggleMode = (e) => {
-    var html = document.documentElement;
-    if (html.getAttribute('data-theme') === "light") {
-      localStorage.setItem('theme','dark');
-      html.setAttribute('data-theme','dark');
-    } else {
-      localStorage.setItem('theme','light');
-      html.setAttribute('data-theme','light');
-    }
     var toggl = e.currentTarget;
     e.currentTarget.parentElement.classList.toggle('dark');
     e.currentTarget.classList.toggle('off');
@@ -131,6 +127,16 @@ export default function App() {
     setTimeout(function() {
       toggl.classList.remove('scaling');
     }, 520);
+    if (theme === "light") {
+      localStorage.setItem('theme','dark');
+      setTheme('dark');
+    } else {
+      localStorage.setItem('theme','light');
+      setTheme('light');
+    }
+  }
+  const colorInvert = (e) => {
+    invertColor = Object.assign(e);
   }
   return (
     <div className="app">
@@ -154,21 +160,21 @@ export default function App() {
       })}}}>
         <div className="color-picker-section">
           <Button value={""} icon={"format_color_fill"} className={"button is-primary"} onClick={(e) => toggleColorPicker(e)}/>
-          <CustomeColor currentColor={newColor[`--color-bg`]} onChangeColor={(e) => updateNewColor(e,"--color-bg")}/>
+          <CustomeColor key={"bg"} currentColor={theme === "dark" ? newColor[`--color-bg`] : invertColor[`--color-bg`]} onChangeColor={(e) => updateNewColor(e,"--color-bg")}/>
           <span className="tag is-info is-small">
           Background Color
           </span>
         </div>
         <div className="color-picker-section">
           <Button value={""} icon={"format_shapes"} className={"button is-primary"} onClick={(e) => toggleColorPicker(e)}/>
-          <CustomeColor currentColor={newColor[`--color-main`]} onChangeColor={(e) => updateNewColor(e,"--color-main")}/>
+          <CustomeColor key={"main"} currentColor={theme === "dark" ? newColor[`--color-main`] : invertColor[`--color-main`]} onChangeColor={(e) => updateNewColor(e,"--color-main")}/>
           <span className="tag is-info is-small">
           Main Color
           </span>
         </div>
         <div className="color-picker-section">
           <Button value={""} icon={"format_color_text"} className={"button is-primary"} onClick={(e) => toggleColorPicker(e)}/>
-          <CustomeColor currentColor={newColor[`--color-text`]} onChangeColor={(e) => updateNewColor(e,"--color-text")}/>
+          <CustomeColor key={"text"} currentColor={theme === "dark" ? newColor[`--color-text`] : invertColor[`--color-text`]} onChangeColor={(e) => updateNewColor(e,"--color-text")}/>
           <span className="tag is-info is-small">
           Text Color
           </span>
@@ -180,7 +186,7 @@ export default function App() {
       </div>
       <Button value={""} icon={"logout"} className={"button is-primary logout"} onClick={() => {logOut()}}/>
       <Outlet />
-      <CustomeStyle object={newColor} />
+      <CustomeStyle object={newColor} currentTheme={theme} colorInverted={(e) => colorInvert(e)}/>
       <div className="toggle-mode dark"><div className="mode" onClick={(e) => toggleMode(e)}></div></div>
     </div>
   );
