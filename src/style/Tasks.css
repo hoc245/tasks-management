@@ -73,7 +73,7 @@ input:focus-visible {
   display: flex;
   top: 80px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -208,40 +208,10 @@ input:focus-visible {
   color: var(--color-text);
 }
 
-.header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 160px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  max-width: 1200px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  padding: 16px;
-  border-radius: 16px;
-  background-color: var(--color-0);
-  -ms-flex-negative: 1;
-      flex-shrink: 1;
-  gap: 24px;
-  z-index: 3;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.header h1 {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-40);
-}
-
 .overlay {
   position: fixed;
   width: calc(100% - 32px);
-  height: 230px;
+  height: 166px;
   top: 0;
   left: 0;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(80%, var(--color-bg)), to(transparent));

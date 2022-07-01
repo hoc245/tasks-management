@@ -43,7 +43,7 @@ input:focus-visible {
     display: flex;
     top:80px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1300px;
     height: fit-content;
     padding:16px;
     border-radius: 16px;
@@ -133,30 +133,30 @@ input:focus-visible {
         }
     }
 }
-.header {
-    position: sticky;
-    top:160px;
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    height: fit-content;
-    padding:16px;
-    border-radius: 16px;
-    background-color: var(--color-0);
-    flex-shrink: 1;
-    gap:24px;
-    z-index: 3;
-    justify-content: space-between;
-    h1 {
-        font-size: 0.75rem;
-        font-weight: 700;
-        color:var(--color-40)
-    }
-}
+// .header {
+//     position: sticky;
+//     top:160px;
+//     display: flex;
+//     width: 100%;
+//     max-width: 1200px;
+//     height: fit-content;
+//     padding:16px;
+//     border-radius: 16px;
+//     background-color: var(--color-0);
+//     flex-shrink: 1;
+//     gap:24px;
+//     z-index: 3;
+//     justify-content: space-between;
+//     h1 {
+//         font-size: 0.75rem;
+//         font-weight: 700;
+//         color:var(--color-40)
+//     }
+// }
 .overlay {
     position: fixed;
     width: calc(100% - 32px);
-    height: 230px;
+    height: 166px;
     top:0;
     left:0;
     background: linear-gradient(180deg, var(--color-bg) 80%, transparent 100%);

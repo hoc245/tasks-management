@@ -121,16 +121,6 @@ export default function Tasks() {
           </div>
           <Button value={"Add"} type={"is-primary"} icon={"add"} onClick={() => {openModal()}}/>
         </div>
-        <div key={`header${uid()}`} className="header">
-            <h1 className="col1">Task</h1>
-            {/* <h1 className="col2">Main</h1> */}
-            <h1 className="col3">Incharge</h1>
-            <h1 className="col4">Deadline</h1>
-            <h1 className="col5">Start</h1>
-            <h1 className="col6">Finish</h1>
-            <h1 className="col7">Cost</h1>
-            <h1 className="col8">Status</h1>
-        </div>
         <div className="overlay"></div>
         <div className="taskList">
           {allCompany.filter(item => filterTasks.company === true ? item : item.name === filterTasks.company).map(item => {
@@ -154,3 +144,15 @@ export default function Tasks() {
     </div>
   );
 }
+
+
+// <div key={`header${uid()}`} className="header">
+// <h1 className="col1">Task</h1>
+// {/* <h1 className="col2">Main</h1> */}
+// <h1 className="col3">Incharge</h1>
+// <h1 className="col4">Deadline</h1>
+// <h1 className="col5">Start</h1>
+// <h1 className="col6">Finish</h1>
+// <h1 className="col7">Cost</h1>
+// <h1 className="col8">Status</h1>
+// </div>

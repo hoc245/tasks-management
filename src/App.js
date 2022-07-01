@@ -15,6 +15,14 @@ let invertColor = {};
 export default function App() {
   const navigate = useNavigate();
   let location = useLocation();
+  const invertHex = (bg) => {
+    bg=parseInt(Number(bg.replace('#', '0x')), 10)
+    bg=~bg
+    bg=bg>>>0
+    bg=bg&0x00ffffff
+    bg='#' + bg.toString(16).padStart(6, "0")
+    return bg
+  }
   var loginState = parseInt(localStorage.getItem('loginState'));
   const [newColor, setNewColor] = useState(() => {
     if(!localStorage.getItem('colorScheme')) {
@@ -30,6 +38,14 @@ export default function App() {
       return temp
     } else {
       return Object.assign(JSON.parse(localStorage.getItem('colorScheme')))
+    }
+  });
+  const [fontSize,setFontSize] = useState(() => {
+    if(!localStorage.getItem('fontsize')) {
+      localStorage.setItem('fontsize','12px');
+      return "12px"
+    } else {
+      return localStorage.getItem('fontsize');
     }
   });
   const [theme,setTheme] = useState(() => {
@@ -61,6 +77,8 @@ export default function App() {
       document.querySelector('.toggle-mode').classList.add('dark');
       document.querySelector('.mode').classList.remove('off');
     }
+    document.documentElement.style.fontSize = fontSize;
+    localStorage.setItem('fontsize',fontSize);
   })
   const logOut = () => {
     signOut(auth).then(() => {
@@ -183,6 +201,12 @@ export default function App() {
         palette
         </span>
         <Button value={""} icon={"restart_alt"} className={"button is-danger reset-color"} onClick={() => {resetColor()}}/>
+      </div>
+      <div className="font-size">
+        <Button value={""} icon={"format_size"} className={"button is-primary"} onClick={(e) => e.currentTarget.parentElement.classList.toggle('is-active')}/>
+        <Button value={"Small"} icon={"format_size"} className={"font-size-select button is-primary"} onClick={() => {setFontSize("12px")}}/>
+        <Button value={"Regular"} icon={"format_size"} className={"font-size-select button is-primary"} onClick={() => {setFontSize("16px")}}/>
+        <Button value={"Large"} icon={"format_size"} className={"font-size-select button is-primary"} onClick={() => {setFontSize("20px")}}/>
       </div>
       <Button value={""} icon={"logout"} className={"button is-primary logout"} onClick={() => {logOut()}}/>
       <Outlet />

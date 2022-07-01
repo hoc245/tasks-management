@@ -189,7 +189,7 @@ html,body {
 .section {
     padding:0;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1300px;
     margin:auto;
     height: fit-content;
     min-height: 100%;
@@ -304,6 +304,7 @@ html,body {
     .button {
         padding:0.5em;
         border-radius: 50%;
+        font-size: 16px;
     }
     .button span {
         margin:0;
@@ -405,7 +406,9 @@ html,body {
         transition:all 300ms ease;
     }
 }
-
+.color-picker.is-active + .font-size {
+    top:calc(50% + 105px)
+}
 // Toggle Mode
 .toggle-mode {
     position: absolute;
@@ -475,3 +478,64 @@ html,body {
       transform: scale(1.8);
     }
   }
+
+// Font size
+.font-size {
+    position: absolute;
+    left:8px;
+    top: calc(50% + 56px);
+    transform: translateY(-50%);
+    transition: all 300ms ease;
+    .button.is-primary:nth-of-type(1) {
+        padding:0.5em;
+        font-size:16px;
+        border-radius: 50%;
+        & * {
+            font-size: inherit;
+        }
+        .icon {
+            margin:0;
+        }
+        span {
+            color:#fff;
+        }
+    }
+    .font-size-select {
+        position: absolute;
+        left: calc(100%);
+        transition: all 300ms ease;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        &:nth-of-type(2) {
+            font-size:12px;
+            top:0;
+            & * {
+                font-size: inherit;
+            }
+        }
+        &:nth-of-type(3) {
+            font-size:16px;
+            top: 38px;
+            & * {
+                font-size: inherit;
+            }
+        }
+        &:nth-of-type(4) {
+            font-size:20px;
+            top:85px;
+            & * {
+                font-size: inherit;
+            }
+        }
+    }
+    &.is-active {
+        .font-size-select {
+            position: absolute;
+            left: calc(100% + 8px);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        } 
+    }
+}

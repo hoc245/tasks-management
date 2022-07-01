@@ -234,7 +234,7 @@ html, body {
 .section {
   padding: 0;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: auto;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -369,6 +369,7 @@ html, body {
 .color-picker .button {
   padding: 0.5em;
   border-radius: 50%;
+  font-size: 16px;
 }
 
 .color-picker .button span {
@@ -498,6 +499,10 @@ html, body {
   transition: all 300ms ease;
 }
 
+.color-picker.is-active + .font-size {
+  top: calc(50% + 105px);
+}
+
 .toggle-mode {
   position: absolute;
   left: 8px;
@@ -572,5 +577,78 @@ html, body {
     -webkit-transform: scale(1.8);
             transform: scale(1.8);
   }
+}
+
+.font-size {
+  position: absolute;
+  left: 8px;
+  top: calc(50% + 56px);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+.font-size .button.is-primary:nth-of-type(1) {
+  padding: 0.5em;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.font-size .button.is-primary:nth-of-type(1) * {
+  font-size: inherit;
+}
+
+.font-size .button.is-primary:nth-of-type(1) .icon {
+  margin: 0;
+}
+
+.font-size .button.is-primary:nth-of-type(1) span {
+  color: #fff;
+}
+
+.font-size .font-size-select {
+  position: absolute;
+  left: calc(100%);
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.font-size .font-size-select:nth-of-type(2) {
+  font-size: 12px;
+  top: 0;
+}
+
+.font-size .font-size-select:nth-of-type(2) * {
+  font-size: inherit;
+}
+
+.font-size .font-size-select:nth-of-type(3) {
+  font-size: 16px;
+  top: 38px;
+}
+
+.font-size .font-size-select:nth-of-type(3) * {
+  font-size: inherit;
+}
+
+.font-size .font-size-select:nth-of-type(4) {
+  font-size: 20px;
+  top: 85px;
+}
+
+.font-size .font-size-select:nth-of-type(4) * {
+  font-size: inherit;
+}
+
+.font-size.is-active .font-size-select {
+  position: absolute;
+  left: calc(100% + 8px);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
 }
 /*# sourceMappingURL=App.css.map */
