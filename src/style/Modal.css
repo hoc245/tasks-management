@@ -20,7 +20,7 @@
 }
 
 .modal .modal-card .modal-card-head p {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: var(--color-text);
 }
 
@@ -54,7 +54,7 @@
 }
 
 .modal .modal-card .modal-card-body .card-header-content .card-title input {
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 24px;
   font-weight: 700;
   padding: 8px 0px;
@@ -62,7 +62,7 @@
 }
 
 .modal .modal-card .modal-card-body .card-header-content .card-title input:nth-of-type(2) {
-  font-size: 14px;
+  font-size: 0.875e;
   line-height: 24px;
   padding: 8px 0px;
 }
@@ -75,7 +75,7 @@
   display: block;
   width: 100%;
   border-bottom: 1px solid var(--color-0);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 40px;
   height: 40px;
 }
@@ -191,7 +191,7 @@
   position: absolute;
   top: -32px;
   left: 0;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .modal .modal-card .modal-card-body .card-body-content .userselect .dropdown-trigger, .modal .modal-card .modal-card-body .card-body-content .deadline.col6 .dropdown-trigger, .modal .modal-card .modal-card-body .card-body-content .dropdown .dropdown-trigger {

@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import { uid } from "uid";
+import React, {useEffect, useState, useRef} from "react";
 import Button from "./Button";
 import {auth} from "../firebase";
 import Datepicker from "./Datepicker";
@@ -8,29 +7,32 @@ import Dropdown from "./Dropdown";
 import { updateTask , removeTask } from "./modifiTask";
 import { getStateFilter } from "../components/filterData";
 import UserSelect from "./UserSelect";
-import { useHref, useLocation } from "react-router-dom";
+import useSmoothScroll from "react-smooth-scroll-hook";
 
-export default function Task({task,alluser,incharge,scrollTo = false}) { 
+export default function Task({task,alluser,incharge,scrollToEle = null}) { 
     const currentUser = auth.currentUser.uid;
     const [userIncharge,setUserIncharge] = useState(incharge ? incharge : {
-        avatar : "",
+        avatar : "https://cdn.dribbble.com/users/232189/avatars/small/66f57b76decb9f1795af8eb74076a476.jpg?1555512051",
         name : "Assign designer",
-        permission : "designer",
+        permission : "Designer",
+        id : "",
+    })
+    const ref = useRef(document.querySelector('.app'));
+    const { scrollTo } = useSmoothScroll({
+        ref,
+        speed : 30,
+        direction: 'y'
     })
     useEffect(() => {
         const brief = document.getElementById(`taskbrief${task.id}`);
         const note = document.getElementById(`tasknote${task.id}`);
         brief.innerHTML = task.brief;
         note.innerHTML = task.note;
-        if(scrollTo) {
-            console.log(document.getElementById(task.id));
-            document.getElementById(task.id).scrollIntoView({
-                block : "center",
-                behavior : "smooth"
-            });
-            openTask()
+        if(scrollToEle) {
+            scrollTo(`[id="${scrollToEle}"]`,-250);
+            openTask();
         }
-    })
+    },[]);
     const stateFilter = getStateFilter();
     let dollarUSLocale = Intl.NumberFormat('en-US');
     const handleCalendar = (value,type) => {
@@ -109,9 +111,20 @@ export default function Task({task,alluser,incharge,scrollTo = false}) {
     }
     const handleIncharge = (e) => {
         if(alluser[currentUser].permission === "Admin" || alluser[currentUser].id === task.creator) {
-            task.incharge = e;
-            updateTask(task);
-            setUserIncharge(alluser[e]);
+            if(e === "") {
+                task.incharge = "";
+                updateTask(task);
+                setUserIncharge({
+                    avatar : "https://cdn.dribbble.com/users/232189/avatars/small/66f57b76decb9f1795af8eb74076a476.jpg?1555512051",
+                    name : "Assign designer",
+                    permission : "Designer",
+                    id : "",
+                })
+            } else {
+                task.incharge = e;
+                updateTask(task);
+                setUserIncharge(alluser[e]);
+            }
         } else {
             return false;
         }
@@ -174,7 +187,7 @@ export default function Task({task,alluser,incharge,scrollTo = false}) {
                         </div>
                     </div>
                     <div className="card-content">
-                        <div className="card-content-header" onClick={(e) => openTask(e)}>
+                        <div className="card-content-header" onClick={(e) => {openTask(e);scrollTo(`[id="${task.id}"]`,-250)}}>
                             <h1 spellCheck="false" id={`title${task.id}`}>{task.title}</h1>
                             <p spellCheck="false" id={`des${task.id}`} >{task.des}</p>
                             <span className="tag is-info is-small">

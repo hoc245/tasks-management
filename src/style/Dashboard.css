@@ -12,8 +12,19 @@
   max-width: 1200px;
 }
 
-.Dashboard .dashboard-section {
+.Dashboard .dashboard-section-left, .Dashboard .dashboard-section-right {
   width: calc(50% - 8px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 16px;
+}
+
+.Dashboard .dashboard-section {
   background-color: var(--color-20);
   border: 1px solid var(--color-0);
   padding: 16px;
@@ -54,13 +65,15 @@
 }
 
 .Dashboard .dashboard-section table thead tr th:not(.dropdown-state) {
-  color: var(--color-40);
-  font-size: 12px;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  vertical-align: middle;
 }
 
 .Dashboard .dashboard-section table tbody tr {
   border-radius: 8px;
   overflow: hidden;
+  color: var(--color-text);
 }
 
 .Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) .userInfo {
@@ -81,14 +94,14 @@
 .Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) .userInfo span:nth-of-type(1) {
   width: 100%;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 0.875rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
 .Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) .userInfo span:nth-of-type(2) {
-  font-size: 12px;
+  font-size: 0.75rem;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -108,20 +121,20 @@
 .Dashboard .dashboard-section table tbody tr th:not(.dropdown-state) span {
   display: inline-block;
   vertical-align: middle;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text);
 }
 
 .Dashboard .dashboard-section table tbody th:not(.dropdown-state) {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text);
   vertical-align: middle;
 }
 
 .Dashboard .dashboard-section table tbody th:not(.dropdown-state) p:nth-of-type(2) {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 300;
 }
 
@@ -157,7 +170,7 @@
 }
 
 .Dashboard .yourTasks th:not(.dropdown-state):nth-of-type(2) {
-  font-size: 12px;
+  font-size: 0.75rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -189,12 +202,12 @@
 
 .Dashboard .totalCost .cost-card h1 {
   font-weight: 500;
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-bottom: 24px;
 }
 
 .Dashboard .totalCost .cost-card p {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 700;
   padding-right: 24px;
 }
@@ -241,7 +254,7 @@
             flex-direction: column;
   }
   .Dashboard .dashboard-section table tbody tr th:nth-of-type(2), .Dashboard .dashboard-section table tbody tr th:nth-of-type(3) {
-    font-size: 12px;
+    font-size: 0.75rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

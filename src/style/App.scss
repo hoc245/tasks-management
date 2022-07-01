@@ -28,10 +28,13 @@ input {
 html,body {
     width: 100%;
     height: 100%;
-}
-html,body {
+    scroll-behavior: smooth;
     overflow: hidden;
-    height: 100%;
+}
+@media (prefers-reduced-motion) {
+    html {
+        scroll-behavior: auto;
+      }
 }
 ::-webkit-scrollbar {
     width: 8px;
@@ -59,8 +62,16 @@ html,body {
 // Bulma
 .button.is-primary {
     background-color: var(--color-main);
+    color:var(--color-text);
     &:hover {
-        background-color: #af4b75;
+        background-color: var(--color-main);
+        color:var(--color-text);
+    }
+}
+.button.is-primary.is-small {
+    background-color: var(--color-main);
+    &:hover {
+        background-color: var(--color-main);
     }
 }
 .button.is-ghost {
@@ -72,6 +83,12 @@ html,body {
     &:focusLnot(:active) {
         box-shadow: none;
     }
+}
+.button {
+    cursor: pointer;
+}
+.button.is-primary:focus:not(:active) {
+    box-shadow: none;
 }
 // root
 #root {
@@ -100,7 +117,7 @@ html,body {
     padding:8px 24px 0px;
     gap:24px;
     z-index: 999;
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 8px 8px;
     background-color: var(--color-0);
     .nav-item {
         z-index: 5;
@@ -124,7 +141,7 @@ html,body {
             text-align: center;
             transition:all 300ms ease;
             font-weight:700;
-            font-size: 12px;
+            font-size: 0.75rem;
         }
         span:nth-of-type(2) {
             transition: all 300ms ease;
@@ -140,24 +157,6 @@ html,body {
         bottom: -24px;
         border:4px solid var(--color-bg);
         transition: all 300ms ease;
-        &::before,&::after {
-            position: absolute;
-            content:'';
-            width: 24px;
-            height: 14px;
-            bottom:calc(50% + 1px);
-            background: transparent;
-        }
-        &::before {
-            left:calc(-50% - 4px);
-            border-radius: 0 0 20px 0;
-            box-shadow: 0px 2px 0px var(--color-bg);
-        }
-        &::after {
-            right:calc(-50% - 4px);
-            border-radius: 0 0 0 20px;
-            box-shadow: 0px 2px 0px var(--color-bg);
-        }
     }
     .nav-item.is-active {
         span:nth-of-type(1) {
@@ -209,6 +208,7 @@ html,body {
     right:16px;
     top:16px;
     background-color: var(--color-0);
+    color:var(--color-text);
     gap:0;
     .icon {
         margin:0;
@@ -222,3 +222,256 @@ html,body {
         opacity: 1;
     }
 }
+
+// Color Picker
+.color-picker {
+    position: fixed;
+    left:8px;
+    top:50%;
+    transform: translateY(-50%);
+    padding:16px 8px;
+    width: 42px;
+    height: 42px;
+    background-color: var(--color-main);
+    border-radius: 50%;
+    z-index: 999;
+    cursor: pointer;
+    &.is-active::after {
+        opacity: 1;
+        transform: rotate(-45deg) scale(100%);
+    }
+    &.is-active {
+        .color-picker-section {
+            &:nth-of-type(1) {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                top:-54px;
+                left:0;
+                transform: scale(100%);
+            }
+            &:nth-of-type(2) {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                top:-27px;
+                left:46px;
+                transform: scale(100%);
+            }
+            &:nth-of-type(3) {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                top:27px;
+                left:46px;
+                transform: scale(100%);
+            }
+        }
+        .reset-color {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+            top:54px;
+            left:0px;
+            transform: scale(100%);
+        }
+    }
+    .color-picker-icon {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        color:#fff;
+    }
+    &::after {
+        position: absolute;
+        content:'';
+        display: block;
+        width: calc(100% + 64px);
+        height: calc(100% + 64px);
+        border-right:1px solid var(--color-0);
+        border-bottom:1px solid var(--color-0);
+        border-left:1px solid var(--color-bg);
+        border-top:1px solid var(--color-bg);
+        transform: rotate(-45deg) scale(80%);
+        transition: all 300ms ease;
+        opacity: 0;
+        top:-32px;
+        left:-32px;
+        border-radius: 50%;
+        filter: invert(100%);
+    }
+    .button {
+        padding:0.5em;
+        border-radius: 50%;
+    }
+    .button span {
+        margin:0;
+        padding:0;
+    }
+    .button .icon:first-child:not(:last-child) {
+        margin:0;
+        padding:0;
+    }
+    &-section {
+        position: absolute;
+        margin-bottom: 16px;
+        z-index: 9;
+        .tag {
+            left:42px;
+            bottom:10px;
+            z-index: 99;
+        }
+        &:hover .tag{
+            opacity: 1;
+            visibility: visible;
+            left: 50px;
+        }
+        &:nth-of-type(1) {
+            opacity: 0;
+            visibility: 0;
+            pointer-events: none;
+            top:-42px;
+            transform: scale(80%);
+            left:0;
+            transition:all 300ms ease;
+            z-index: 4;
+            .button.is-primary {
+                background-color:var(--color-bg);
+                filter:invert(100%);
+                .icon.is-small {
+                    color:var(--color-bg);
+                    filter:invert(100%);
+                }
+            }
+        }
+        &:nth-of-type(2) {
+            opacity: 0;
+            visibility: 0;
+            pointer-events: none;
+            top:-20px;
+            left:34px;
+            transform: scale(80%);
+            transition:all 300ms ease;
+            z-index: 3;
+            .button.is-primary {
+                background-color:var(--color-main);
+                color:#fff;
+            }
+        }
+        &:nth-of-type(3) {
+            opacity: 0;
+            visibility: 0;
+            pointer-events: none;
+            top:20px;
+            transform: scale(80%);
+            left:34px;
+            transition:all 300ms ease;
+            z-index: 1;
+            .button.is-primary {
+                background-color:var(--color-text);
+                .icon.is-small {
+                    color:var(--color-text);
+                    filter:invert(100%);
+                }
+            }
+        }
+        .react-colorful {
+            position: absolute;
+            top:10px;
+            left:calc(100% + 16px);
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transition: all 300ms ease;
+            z-index: 9999;
+            &.is-active {
+                top:0;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+            }
+        }
+    }
+    .reset-color {
+        opacity: 0;
+        visibility: 0;
+        pointer-events: none;
+        top:43px;
+        left:0px;
+        position: absolute;
+        z-index: 9;
+        transform: scale(80%);
+        transition:all 300ms ease;
+    }
+}
+
+// Toggle Mode
+.toggle-mode {
+    position: absolute;
+    left:8px;
+    bottom:16px;
+}
+.mode {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: all 520ms ease;
+  }
+  .mode:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: linear-gradient(to right, #000 50%, #fff 50.01%);
+    border: 2px solid #000;
+    transition: transform 0.5s ease-out;
+  }
+  .mode:after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    mix-blend-mode: difference;
+  }
+  .dark .mode {
+    background: #000;
+  }
+  .dark .mode:before {
+    border: 2px solid #fff;
+    transform: rotate(180deg);
+  }
+  .scaling:after {
+    animation: scaleInner 0.5s ease forwards;
+  }
+  @-moz-keyframes scaleInner {
+    50% {
+      transform: scale(1.8);
+    }
+  }
+  @-webkit-keyframes scaleInner {
+    50% {
+      transform: scale(1.8);
+    }
+  }
+  @-o-keyframes scaleInner {
+    50% {
+      transform: scale(1.8);
+    }
+  }
+  @keyframes scaleInner {
+    50% {
+      transform: scale(1.8);
+    }
+  }

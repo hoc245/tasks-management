@@ -80,7 +80,9 @@ export default function Modal({company,currentUser,alluser,...rootDOMAttributes}
     }
     const closeModal = () => {
         const modal = document.getElementsByClassName('modal')[0];
-        modal.classList.remove('is-active')
+        modal.classList.remove('is-active');
+        document.getElementById('addBrief').removeAttribute('contenteditable');
+        document.getElementById('addNote').removeAttribute('contenteditable');
     }
     if(currentUser && Object.keys(draftTask).length) {
         return(
@@ -111,11 +113,11 @@ export default function Modal({company,currentUser,alluser,...rootDOMAttributes}
                         <div id={draftTask.id} className="card-main-content is-active">
                             <div className="brief">
                                 <h1 spellCheck="false">Brief</h1>
-                                <div spellCheck="false" id={`addBrief`} contentEditable={true}>{draftTask.brief}</div>
+                                <div spellCheck="false" id={`addBrief`}>{draftTask.brief}</div>
                             </div>
                             <div className="note">
                                 <h1 spellCheck="false">Note</h1>
-                                <div spellCheck="false" id={`addNote`} contentEditable={true}>{draftTask.note}</div>
+                                <div spellCheck="false" id={`addNote`}>{draftTask.note}</div>
                             </div>
                         </div>
                     </section>

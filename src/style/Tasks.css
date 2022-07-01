@@ -44,6 +44,7 @@ input::-webkit-inner-spin-button {
 
 .tag:not(body).is-info {
   background-color: var(--color-0);
+  color: var(--color-text);
 }
 
 .deadline:hover .tag, .start:hover .tag, .end:hover .tag {
@@ -88,10 +89,19 @@ input:focus-visible {
       flex-shrink: 1;
 }
 
+.toolbar :last-child {
+  color: #fff;
+}
+
 .dropdown .button {
   background-color: var(--color-bg);
   border: none;
   color: var(--color-text);
+}
+
+.dropdown .button span {
+  color: inherit;
+  font-weight: 700;
 }
 
 .dropdown .button:hover {
@@ -190,6 +200,14 @@ input:focus-visible {
   color: var(--color-text);
 }
 
+.search.control .icon.is-small.is-left {
+  color: var(--color-text);
+}
+
+.search.control .icon.is-small.is-left span {
+  color: var(--color-text);
+}
+
 .header {
   position: -webkit-sticky;
   position: sticky;
@@ -204,7 +222,7 @@ input:focus-visible {
   height: fit-content;
   padding: 16px;
   border-radius: 16px;
-  background-color: var(--color-variant);
+  background-color: var(--color-0);
   -ms-flex-negative: 1;
       flex-shrink: 1;
   gap: 24px;
@@ -215,7 +233,7 @@ input:focus-visible {
 }
 
 .header h1 {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--color-40);
 }
@@ -226,8 +244,8 @@ input:focus-visible {
   height: 230px;
   top: 0;
   left: 0;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(80%, #2F2F2F), to(rgba(47, 47, 47, 0)));
-  background: linear-gradient(180deg, #2F2F2F 80%, rgba(47, 47, 47, 0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(80%, var(--color-bg)), to(transparent));
+  background: linear-gradient(180deg, var(--color-bg) 80%, transparent 100%);
   z-index: 2;
 }
 
@@ -264,7 +282,7 @@ input:focus-visible {
 }
 
 .card-company .card-company-header h1 {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--color-text);
   font-weight: 500;
   opacity: 0.5;
@@ -423,20 +441,21 @@ input:focus-visible {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   padding-top: 2px;
-  color: var(--color-text);
+  color: #fff;
   cursor: pointer;
 }
 
 .card .card-trigger-header-incharge .card-trigger-time .card-time span.material-symbols-outlined {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: auto;
 }
 
 .card .card-trigger-header-incharge .userselect.dropdown .dropdown-trigger .button {
   background-color: transparent;
+  color: #fff;
 }
 
 .card .card-trigger-header-incharge .dropdown.is-right {
@@ -462,7 +481,8 @@ input:focus-visible {
       -ms-flex-pack: justify;
           justify-content: space-between;
   background-color: transparent;
-  border: 1px solid var(--color-text);
+  border: 1px solid #fff;
+  color: #fff;
 }
 
 .card .card-trigger .card-content {
@@ -481,18 +501,18 @@ input:focus-visible {
 }
 
 .card .card-trigger .card-content-header h1 {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-text);
+  color: #fff;
   margin-bottom: 8px;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
 
 .card .card-trigger .card-content-header p {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-text);
+  color: #fff;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
   margin-bottom: 4px;
@@ -500,7 +520,7 @@ input:focus-visible {
 
 .card .card-trigger .card-content-main {
   margin-top: 0;
-  color: var(--color-text);
+  color: #fff;
   opacity: 0;
   max-height: 0;
   -webkit-transition: all 500ms ease;
@@ -523,20 +543,20 @@ input:focus-visible {
 }
 
 .card .card-trigger .card-content-main .brief h1, .card .card-trigger .card-content-main .note h1 {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 700;
-  color: var(--color-text);
+  color: #fff;
   opacity: 0.8;
   margin-bottom: 8px;
 }
 
 .card .card-trigger .card-content-main .brief div, .card .card-trigger .card-content-main .note div {
   width: 100%;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .card .card-trigger .card-content-main .cost {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   padding-top: 2px;
   height: 40px;
@@ -575,14 +595,13 @@ input:focus-visible {
   background-color: transparent;
   border: none;
   color: transparent;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   overflow: hidden;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  font-size: 12px;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -628,9 +647,21 @@ input:focus-visible {
   visibility: visible;
 }
 
+.card[style="width: 100%"].has-done {
+  opacity: 1;
+}
+
 .card[style="width: 100%"] .background-card::after {
   -webkit-backdrop-filter: blur(16px);
           backdrop-filter: blur(16px);
+}
+
+.smoothlink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .users-incharge.dropdown {
@@ -643,7 +674,7 @@ input:focus-visible {
           align-items: center;
   height: 40px;
   gap: 8px;
-  font-size: 12px;
+  font-size: 0.75rem;
   padding: 0;
   border: none;
 }
@@ -695,7 +726,7 @@ input:focus-visible {
   height: 36px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--color-text);
+  border: 2px solid #fff;
 }
 
 .users-incharge.dropdown .dropdown-trigger .button .button-image span {
@@ -707,7 +738,7 @@ input:focus-visible {
       flex-shrink: 1;
   -ms-flex-preferred-size: 0%;
       flex-basis: 0%;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -742,14 +773,14 @@ input:focus-visible {
   height: 36px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--color-text);
+  border: 2px solid #fff;
 }
 
 .users-incharge.dropdown .dropdown-menu .dropdown-item span span {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
@@ -774,7 +805,7 @@ input:focus-visible {
           box-shadow: var(--ds-lv1);
   border: 1px solid var(--color-0);
   font-family: "Inter",sans-serif;
-  font-size: 12px;
+  font-size: 0.75rem;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -844,7 +875,7 @@ input:focus-visible {
 
 *[contenteditable="true"] {
   padding: 4px 8px;
-  border-bottom: 1px solid var(--color-text);
+  border-bottom: 1px solid #fff;
 }
 
 *[contenteditable="true"]:focus {

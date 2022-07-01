@@ -60,6 +60,8 @@ export default function Tasks() {
     var modal = document.getElementById("modal");
     if(modal) {
       modal.classList.add('is-active');
+      document.getElementById('addBrief').setAttribute('contenteditable',true);
+      document.getElementById('addBrief').setAttribute('contenteditable',true);
     }
   }
   const filterTask = (value,type) => {

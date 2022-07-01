@@ -7,7 +7,6 @@ export default function CompanyTask({company,tasks,users,deleteCallback}) {
     const [tasksList,setTasksList] = useState();
     const stateFilter = getStateFilter();
     const currentHref = useLocation().pathname;
-    console.log(useLocation().pathname);
     useEffect(() => {
         setTasksList(tasks)
     },[tasks.length])
@@ -32,8 +31,7 @@ export default function CompanyTask({company,tasks,users,deleteCallback}) {
                     </div>
                     <div className="card-tasksList">
                         {tasksList.length ? <>{tasksList.map(task => {
-                            console.log(currentHref + " and " + task.id)
-                            return <Task key={task.id} scrollTo={currentHref && currentHref.includes(task.id) ? true : false} task={task} alluser={users} incharge={users[task.incharge]} deleteCallback={(e) => {deleteCallback(e)}}/>
+                            return <Task key={task.id} scrollToEle={currentHref && currentHref.includes(task.id) ? currentHref.replace('/tasks/','') : null} task={task} alluser={users} incharge={users[task.incharge]} deleteCallback={(e) => {deleteCallback(e)}}/>
                         })}</> : <></>}
                     </div>
                 </div>

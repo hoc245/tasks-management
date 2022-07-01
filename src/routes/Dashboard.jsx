@@ -1,6 +1,5 @@
 import React, { useEffect , useRef, useState } from "react";
 import Dropdown from "../components/Dropdown";
-import {uid} from 'uid';
 import {auth , db} from '../firebase';
 import { update, ref, onValue } from "firebase/database";
 import {useNavigate} from "react-router-dom";
@@ -20,6 +19,16 @@ function CreateMyTask({task}) {
         </tr>
     )
 }
+function CreateUserList({user,taskList}) {
+    const today = new Date();
+    return(
+        <tr>
+            <th><span className="imageAvatar"><img src={user.avatar}/></span><span className="userInfo"><span>{user.name}</span><span>{user.email}</span></span></th>
+            <th width={"120px"}>{taskList.filter(task => {return task.incharge === user.id && task.state != "Done"}).length}</th>
+            <th width={"120px"}>{taskList.filter(task => {var deadline = new Date(task.deadline); if(task.incharge === user.id && task.state != "Done" && deadline.getDate() < today.getDate()) {return task} }).length}</th>
+        </tr>
+    )
+}
 const stateFilter = getStateFilter();
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -30,7 +39,6 @@ export default function Dashboard() {
     var yourCost = taskList && dollarUSLocale.format(taskList.filter(item => item.incharge === auth.currentUser.uid).reduce((partialSum, a) => partialSum + parseInt(a.cost),0));
     var waitingTasksCost = taskList && dollarUSLocale.format(taskList.filter(item => item.incharge === null).reduce((partialSum, a) => partialSum + parseInt(a.cost),0));
     let sortedTask = [];
-    const today = new Date();
     useEffect(() => {
         auth.onAuthStateChanged(user => {
             if(user) {
@@ -83,45 +91,64 @@ export default function Dashboard() {
                         <p>{waitingTasksCost}</p>
                     </div>
                 </div>
+                <div className="dashboard-section-left">
                 <div className="userList dashboard-section">
                     <div className="section-title">Users List</div>
-                    <table className="table is-fullwidth">
-                        <thead>
-                            <tr>
-                                <th><abbr>Username</abbr></th>
-                                <th width={"120px"}><abbr>Doing Task</abbr></th>
-                                <th width={"120px"}><abbr>Overdue</abbr></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.values(allUsers).map(item => {
-                                return (<tr>
-                                    <th><span className="imageAvatar"><img src={item.avatar}/></span><span className="userInfo"><span>{item.name}</span><span>{item.email}</span></span></th>
-                                    <th width={"120px"}>{taskList.filter(task => {return task.incharge === item.id && task.state != "Done"}).length}</th>
-                                    <th width={"120px"}>{taskList.filter(task => {var deadline = new Date(task.deadline); if(task.incharge === item.id && task.state != "Done" && deadline.getDate() < today.getDate()) {return task} }).length}</th>
-                                </tr>)
-                            })}
-                        </tbody>
-                    </table>
+                        <table className="table is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th><abbr>Username</abbr></th>
+                                    <th width={"120px"}><abbr>Doing Task</abbr></th>
+                                    <th width={"120px"}><abbr>Overdue</abbr></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {Object.values(allUsers).map(item => {
+                                    return <CreateUserList key={item.id} taskList={taskList} user={item} />
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                <div className="dashboard-section-right">
                 <div className="yourTasks dashboard-section">
-                    <div className="section-title">Your Tasks</div>
-                    <table className="table is-fullwitdh">
-                        <thead>
-                            <tr>
-                                <th><abbr>Title</abbr></th>
-                                <th><abbr>Deadline</abbr></th>
-                                <th><abbr>State</abbr></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {sortedTask.map(item => {
-                                if(item.incharge === auth.currentUser.uid) {
-                                    return <CreateMyTask key={item.id} task={item}/>
-                                }
-                            })}
-                        </tbody>
-                    </table>
+                    <div className="section-title">My Tasks</div>
+                        <table className="table is-fullwitdh">
+                            <thead>
+                                <tr>
+                                    <th><abbr>Title</abbr></th>
+                                    <th><abbr>Deadline</abbr></th>
+                                    <th><abbr>State</abbr></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {sortedTask.map(item => {
+                                    if(item.incharge === auth.currentUser.uid) {
+                                        return <CreateMyTask key={item.id} task={item}/>
+                                    }
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="yourTasks dashboard-section">
+                        <div className="section-title">Create by me</div>
+                        <table className="table is-fullwitdh">
+                            <thead>
+                                <tr>
+                                    <th><abbr>Title</abbr></th>
+                                    <th><abbr>Deadline</abbr></th>
+                                    <th><abbr>State</abbr></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {sortedTask.map(item => {
+                                    if(item.creator === auth.currentUser.uid) {
+                                        return <CreateMyTask key={item.id} task={item}/>
+                                    }
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         )

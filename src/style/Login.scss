@@ -17,11 +17,11 @@
         box-shadow: var(--ds-lv2);
         backdrop-filter: blur(20px);
         .welcome-title {
-            font-size:24px;
+            font-size:1.5rem;
             color: var(--color-20);
             font-weight: 700;
             &:nth-of-type(2) {
-                font-size: 72px;
+                font-size: 4.5rem;
                 margin-top: -32px;
                 margin-bottom: 16px;
                 color: var(--color-main);
@@ -78,7 +78,7 @@
                 width: fit-content;
                 color:var(--color-text);
                 .material-symbols-outlined {
-                    font-size: 16px;
+                    font-size: 1rem;
                 }
             }
             .input {
@@ -105,7 +105,7 @@
                         width: 100%;
                         height: 100%;
                         padding-left: 72px;
-                        font-size: 12px;
+                        font-size: 0.75rem;
                         background-color: transparent;
                         font-weight: 400;
                         color:rgba(255,255,255,0.7);
@@ -166,7 +166,7 @@ form.error {
             width: 100%;
             bottom:-24px;
             left:0;
-            font-size: 14px;
+            font-size: 0.875rem;
             color:var(--color-error);
         }
     }
@@ -180,7 +180,7 @@ form.error {
                 width: 100%;
                 bottom:-24px;
                 left:0;
-                font-size: 14px;
+                font-size: 0.875rem;
                 color:var(--color-error);
             }
         }
@@ -192,7 +192,7 @@ form.error {
                     width: 100%;
                     bottom:-24px;
                     left:0;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     color:var(--color-error);
                 }
             }
@@ -204,10 +204,10 @@ form.error {
         .welcome-content {
             width: 100%;
             .welcome-title:nth-of-type(1) {
-                font-size: 18px;
+                font-size: 1.125rem;
             }
             .welcome-title:nth-of-type(2) {
-                font-size: 48px;
+                font-size: 3rem;
                 margin-top: -11px;
             }
         }
