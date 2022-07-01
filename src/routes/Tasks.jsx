@@ -31,7 +31,7 @@ export default function Tasks() {
       var value = e.currentTarget.value;
 
       [].forEach.call(getAllTask, item => {
-          if(item.querySelectorAll('.card-title h1')[0].innerHTML.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
+          if(item.querySelectorAll('.card-content-header h1')[0].innerHTML.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
               item.style.display = "flex"
           } else {
               item.style.display = "none"
@@ -61,7 +61,7 @@ export default function Tasks() {
     if(modal) {
       modal.classList.add('is-active');
       document.getElementById('addBrief').setAttribute('contenteditable',true);
-      document.getElementById('addBrief').setAttribute('contenteditable',true);
+      document.getElementById('addNote').setAttribute('contenteditable',true);
     }
   }
   const filterTask = (value,type) => {

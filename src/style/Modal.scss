@@ -5,21 +5,21 @@
         backdrop-filter: blur(20px);
     }
     .modal-card {
-        background-color: var(--color-20);
+        background-color: var(--color-bg);
         border-radius: 16px;
         .modal-card-head {
-            background-color: var(--color-20);
+            background-color: var(--color-bg);
             border-color: var(--color-0);
             p {
                 font-size: 1.5rem;
                 color:var(--color-text);
             }
             button {
-                background-color: var(--color-20);
+                background-color: var(--color-bg);
             }
         }
         .modal-card-body {
-            background-color: var(--color-20);
+            background-color: var(--color-bg);
             color:var(--color-text);
             display: flex;
             flex-direction: column;

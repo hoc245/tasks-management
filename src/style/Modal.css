@@ -10,12 +10,12 @@
 }
 
 .modal .modal-card {
-  background-color: var(--color-20);
+  background-color: var(--color-bg);
   border-radius: 16px;
 }
 
 .modal .modal-card .modal-card-head {
-  background-color: var(--color-20);
+  background-color: var(--color-bg);
   border-color: var(--color-0);
 }
 
@@ -25,11 +25,11 @@
 }
 
 .modal .modal-card .modal-card-head button {
-  background-color: var(--color-20);
+  background-color: var(--color-bg);
 }
 
 .modal .modal-card .modal-card-body {
-  background-color: var(--color-20);
+  background-color: var(--color-bg);
   color: var(--color-text);
   display: -webkit-box;
   display: -ms-flexbox;
