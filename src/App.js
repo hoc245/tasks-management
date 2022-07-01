@@ -163,7 +163,7 @@ export default function App() {
           <span>Home</span>
           <span className="material-symbols-outlined">home</span>
         </Link>
-        <Link className={location.pathname.includes('tasks') ? "nav-item is-active" : "nav-item"} to="/tasks">
+        <Link className={location.pathname.includes('tasks') &&!location.pathname.includes('tasks_') ? "nav-item is-active" : "nav-item"} to="/tasks">
           <span>Tasks</span>
           <span className="material-symbols-outlined">task</span>
         </Link>
