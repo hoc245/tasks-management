@@ -419,6 +419,7 @@ html,body {
     position: absolute;
     left:8px;
     bottom:16px;
+    z-index: 999;
 }
 .mode {
     position: relative;
@@ -491,6 +492,7 @@ html,body {
     top: calc(50% + 56px);
     transform: translateY(-50%);
     transition: all 300ms ease;
+    z-index: 999;
     .button.is-primary:nth-of-type(1) {
         padding:0.5em;
         font-size:16px;
